@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Entities\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -10,13 +11,21 @@ class User extends Authenticatable
 {
     use Notifiable;
 
+    protected $primaryKey = 'id';
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name',
+        'surname',
+        'email',
+        'type_document',
+        'document',
+        'password',
+        'role_id',
+        'state'
     ];
 
     /**
@@ -36,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }
