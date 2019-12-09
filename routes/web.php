@@ -20,6 +20,18 @@ Route::get('customers/{customer}/edit')->name('customers.edit')->uses('CustomerC
 Route::get('customers/{customer}/toggle')->name('customers.toggle')->uses('CustomerController@toggle');
 Route::patch('customers/{customer}')->name('customers.update')->uses('CustomerController@update');
 
+//Invoice
+
+Route::get('/invoices')->name('invoices.index')->uses('InvoiceController@index');
+Route::get('invoices/create')->name('invoices.create')->uses('InvoiceController@create');;
+Route::post('invoices/store')->name('invoices.store')->uses('InvoiceController@store');
+Route::get('invoices/{invoice}')->name('invoices.show')->uses('InvoiceController@show');
+Route::get('invoices/{invoice}/edit')->name('invoices.edit')->uses('InvoiceController@edit');
+Route::patch('invoices/{invoice}')->name('invoices.update')->uses('InvoiceController@update');
+Route::get('invoices/{invoice}/status')->name('invoices.edit.status')->uses('InvoiceController@editStatus');
+Route::patch('invoices/status/{invoice}')->name('invoices.update.status')->uses('InvoiceController@updateStatus');
+
+
 Route::get('/', function () {
     return view("home");
 })->name("home.index");

@@ -58,5 +58,12 @@
         });
     });
 </script>
+<script type="text/javascript">
+    $(function() {
+        $('#datetimepicker1').datetimepicker({
+            language: 'pt-BR'
+        });
+    });
+</script>
 </body>
 </html>

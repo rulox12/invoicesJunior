@@ -39,7 +39,7 @@
     "Total": "Total",
     "Description": "Descripcion",
     "Create Invoice": "Crear Factura",
-    "Customer": "Clientes",
+    "Customer": "Cliente",
     "Invoice Details": "Detalle de la Factura",
     "Edit Invoice": "Editar Factura",
     "Failed": "Fallida",
@@ -49,5 +49,7 @@
     "Update User": "Actualizar Usuario",
     "Update Customer": "Actualizar Cliente",
     "Update Invoice": "Actualizar Factura",
-    "Edit Customer": "Editar Cliente"
+    "Edit Customer": "Editar Cliente",
+    "The date must be higher than today": "La fecha debe ser superior al dia de hoy",
+    "Sales Invoice": "Factura de Venta"
 }
