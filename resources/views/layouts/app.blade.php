@@ -42,11 +42,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.9.0/feather.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
 <script src={{asset("js/dashboard.js")}}></script>
-import 'balloon-css';
 
 <script>
-    import 'balloon-css';
-
     // Write on keyup event of keyword input element
     $(document).ready(function () {
         $("#search").keyup(function () {
@@ -58,6 +55,13 @@ import 'balloon-css';
                 else
                     $(this).show();
             });
+        });
+    });
+</script>
+<script type="text/javascript">
+    $(function() {
+        $('#datetimepicker1').datetimepicker({
+            language: 'pt-BR'
         });
     });
 </script>
