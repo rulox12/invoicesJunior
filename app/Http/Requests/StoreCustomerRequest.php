@@ -25,7 +25,7 @@ class StoreCustomerRequest extends FormRequest
     {
         return [
             'name' => 'required|string|min:1|max:20|regex:/^[\pL\s\-]+$/u',
-            'surname' => 'required|string|min:1|max:20|regex:/^[A-Za-z_\&\:]+$/',
+            'surname' => 'required|string|min:1|max:20|regex:/^[\pL\s\-]+$/u',
             'type_document' => 'required|string|min:2|max:3',
             'document' => 'required|integer',
         ];
