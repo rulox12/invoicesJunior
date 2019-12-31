@@ -51,5 +51,9 @@
     "Update Invoice": "Actualizar Factura",
     "Edit Customer": "Editar Cliente",
     "The date must be higher than today": "La fecha debe ser superior al dia de hoy",
-    "Sales Invoice": "Factura de Venta"
+    "Sales Invoice": "Factura de Venta",
+    "Sellers": "Vendedores",
+    "Edit Seller": "Editar Vendedor",
+    "Seller Details": "Detalle del Vendedor",
+    "Update seller": "Actualizar Vendedor"
 }
