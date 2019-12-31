@@ -14,7 +14,7 @@
                id="document"
                placeholder="{{__('Identification')}}"
                name="document"
-               value="{{ old('document',$customer->document ?? '') }}"
+               value="{{ old('document',$seller->document ?? '') }}"
                required>
     </div>
 
@@ -26,7 +26,7 @@
                class="form-control"
                id="name" placeholder="{{__('Name')}}"
                name="name"
-               value="{{ old('name',$customer->name ?? '') }}"
+               value="{{ old('name',$seller->name ?? '') }}"
                required>
     </div>
     <div class="form-group col-md-6 text-left">
@@ -35,7 +35,7 @@
                class="form-control"
                id="surname"
                placeholder="{{__('Surname')}}"
-               value="{{ old('surname',$customer->surname ?? '') }}"
+               value="{{ old('surname',$seller->surname ?? '') }}"
                name="surname" required>
     </div>
 </div>

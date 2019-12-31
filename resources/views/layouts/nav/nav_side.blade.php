@@ -25,6 +25,12 @@
                     {{__("Customers")}}
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('sellers.index')}}">
+                    <span data-feather="users"></span>
+                    {{__("Sellers")}}
+                </a>
+            </li>
         </ul>
     </div>
 </nav>
