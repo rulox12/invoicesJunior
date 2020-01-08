@@ -33,6 +33,8 @@ Route::patch('sellers/{seller}')->name('sellers.update')->uses('sellerController
 //Invoice
 
 Route::get('/invoices')->name('invoices.index')->uses('InvoiceController@index');
+Route::get('/invoices/import')->name('invoices.import')->uses('InvoiceController@importExcelShow');
+Route::patch('/invoices/importSave')->name('invoices.importSave')->uses('InvoiceController@importExcelSave');
 Route::get('invoices/create')->name('invoices.create')->uses('InvoiceController@create');;
 Route::post('invoices/store')->name('invoices.store')->uses('InvoiceController@store');
 Route::get('invoices/{invoice}')->name('invoices.show')->uses('InvoiceController@show');

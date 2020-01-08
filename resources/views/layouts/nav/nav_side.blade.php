@@ -13,12 +13,7 @@
                     {{__("Administrators")}}
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('invoices.index')}}">
-                    <span data-feather="file"></span>
-                    {{__("Invoices")}}
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="{{route('customers.index')}}">
                     <span data-feather="users"></span>
@@ -29,6 +24,12 @@
                 <a class="nav-link" href="{{route('sellers.index')}}">
                     <span data-feather="users"></span>
                     {{__("Sellers")}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('invoices.index')}}">
+                    <span data-feather="file"></span>
+                    {{__("Invoices")}}
                 </a>
             </li>
         </ul>

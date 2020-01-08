@@ -55,5 +55,16 @@
     "Sellers": "Vendedores",
     "Edit Seller": "Editar Vendedor",
     "Seller Details": "Detalle del Vendedor",
-    "Update seller": "Actualizar Vendedor"
+    "Update seller": "Actualizar Vendedor",
+    "Consecu'tive": "Consecutivo",
+    "Received": "Recibido",
+    "Not Received": "No recibido",
+    "Import": "Importar",
+    "Import Invoice": "Importar Factura",
+    "Successful": "Exitoso",
+    "Stored record": "Registro Almacenado",
+    "It was imported correctly": "Se importo correctamente",
+    "Register number: ": "Registro numero: ",
+    "failure": "fallo"
+
 }

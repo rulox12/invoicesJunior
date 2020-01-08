@@ -12,19 +12,22 @@
                     </form>
                 </div>
                 <div class="p-2">
+                    <a href="{{route('invoices.import')}}" class="btn btn btn-primary" role="button"
+                       aria-disabled="true">
+                        {{__('Import')}}
+                    </a>
                     <a href="{{route('invoices.create')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">
                         {{__('Create')}}
                     </a>
-
                 </div>
             </div>
         </div>
-
         <div class="card-body">
             <table class="table" id="mytable">
                 <thead class="thead-dark">
                 <tr class="text-left">
+                    <th scope="col">{{__('Consecutive')}}</th>
                     <th scope="col">{{__('Expedition Date')}}</th>
                     <th scope="col">{{__('Type')}}</th>
                     <th scope="col">{{__('Total')}}</th>
@@ -36,6 +39,7 @@
                 <tbody>
                 @forelse($invoices as $invoice)
                     <tr class="text-left">
+                        <td>{{ $invoice->consecutive}}</td>
                         <td>{{ $invoice->expedition_date}}</td>
                         <td>{{ $invoice->type }}</td>
                         <td>{{ $invoice->total }}</td>

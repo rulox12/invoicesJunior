@@ -15,7 +15,7 @@
         <label class="h6" for="document">{{__('Customers')}}</label>
         <select id="customer_id" class="form-control" name="customer_id">
             @foreach($customers as $customer)
-                <option value="{{ $customer->id }} " {{ old('role_id',$invoice->role_id ?? '' ) ==
+                <option value="{{ $customer->id }} " {{ old('customer_id',$invoice->role_id ?? '' ) ==
                         $customer->id ? ' selected' : '' }}>
                     {{ $customer->name  }}
                 </option>
@@ -23,35 +23,29 @@
         </select>
     </div>
 </div>
+
 <div class="form-row">
+    <div class="form-group col-md-6 text-left">
+        <label class="h6" for="document">{{__('Sellers')}}</label>
+        <select id="seller_id" class="form-control" name="seller_id">
+            @foreach($sellers as $seller)
+                <option value="{{ $seller->id }} " {{ old('seller_id',$invoice->role_id ?? '' ) ==
+                        $seller->id ? ' selected' : '' }}>
+                    {{ $seller->name  }}
+                </option>
+            @endforeach
+        </select>
+    </div>
     <div class="form-group col-md-6 text-left">
         <label class="h6" for="type">{{__('Type')}}</label>
         <select id="type" class="form-control" name="type">
             <option>{{__('Sales Invoice')}}</option>
         </select>
     </div>
-    <div class="form-group col-md-6 text-left">
-        <label class="h6" for="tax">{{__('Tax')}}</label>
-        <input type="number"
-               class="form-control"
-               id="tax"
-               placeholder="{{__('Tax')}}"
-               name="tax"
-               value="{{ old('total',$invoice->tax ?? '') }}"
-               required>
-    </div>
+
 </div>
+
 <div class="form-row">
-    <div class="form-group col-md-6 text-left">
-        <label class="h6" for="description">{{__('Description')}}</label>
-        <textarea type="text"
-                  class="form-control"
-                  id="description"
-                  placeholder="{{__('Description')}}"
-                  name="description"
-                  required>{{ old('description',$invoice->description ?? '') }}
-        </textarea>
-    </div>
     <div class="form-group col-md-6 text-left">
         <label class="h6" for="total">{{__('Total')}}</label>
         <input type="number"
@@ -62,7 +56,18 @@
                value="{{ old('total',$invoice->total ?? '') }}"
                required>
     </div>
+    <div class="form-group col-md-6 text-left">
+        <label class="h6" for="description">{{__('Description')}}</label>
+        <textarea type="text"
+                  class="form-control"
+                  id="description"
+                  placeholder="{{__('Description')}}"
+                  name="description"
+                  required>{{ old('description',$invoice->description ?? '') }}
+        </textarea>
+    </div>
 </div>
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
