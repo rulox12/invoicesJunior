@@ -194,3 +194,7 @@ h2 {
 card-body-create {
     padding: 5px;
 }
+
+.card-body {
+    padding: 3px;
+}

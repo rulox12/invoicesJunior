@@ -17,7 +17,6 @@
     <link href="{{asset('css/dashboard.css')}}" rel="stylesheet">
 </head>
 <body>
-
 <div class="container-fluid">
     <div class="row">
         @guest
@@ -65,5 +64,6 @@
         });
     });
 </script>
+@include('sweetalert::alert')
 </body>
 </html>
