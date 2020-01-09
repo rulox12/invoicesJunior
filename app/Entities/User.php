@@ -50,4 +50,17 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Role::class);
     }
+
+    public function scopeFilter($query, $type, $value)
+    {
+        if ($type == 'state') {
+            $value = ($value == "true") ? true : false;
+
+            return $query->where($type, 'LIKE', $value);
+        }
+
+        if ($type && $value) {
+            return $query->where($type, 'LIKE', "%$value%");
+        }
+    }
 }

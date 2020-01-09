@@ -14,6 +14,7 @@ class Invoice extends Model
      * @var array
      */
     protected $fillable = [
+        'consecutive',
         'expedition_date',
         'due_date',
         'received_date',
@@ -23,6 +24,9 @@ class Invoice extends Model
         'total',
         'customer_id',
         'user_id',
+        'seller_id',
+        'state'
+
     ];
 
     public function customer()
@@ -33,5 +37,27 @@ class Invoice extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function seller()
+    {
+        return $this->belongsTo(Seller::class);
+    }
+
+    //scope
+
+    public function scopeFilter($query, $type, $value)
+    {
+        if ($type && $value) {
+            return $query->where($type, 'LIKE', "%$value%");
+        }
+    }
+
+    public function scopeFilterDate($query, $type, $from, $to)
+    {
+        if ($type && $from && $to) {
+            return $query->where($type, '>=', $from)
+                ->where($type, '<=', $to);
+        }
     }
 }

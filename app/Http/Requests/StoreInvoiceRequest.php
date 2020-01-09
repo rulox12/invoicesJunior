@@ -28,10 +28,10 @@ class StoreInvoiceRequest extends FormRequest
         return [
             'due_date' => ['required', 'date', new DateHigherToday],
             'type' => 'required|string|min:1|max:50|regex:/^[\pL\s\-]+$/u',
-            'tax' => 'required|integer',
             'description' => 'required|string|min:1|max:256|regex:/^[\pL\s\-]+$/u',
             'total' => 'required|integer',
             'customer_id' => 'required|exists:customers,id',
+            'seller_id' => 'required|exists:sellers,id',
         ];
     }
 }

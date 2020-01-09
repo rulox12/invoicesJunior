@@ -11,7 +11,6 @@
                        aria-disabled="true">
                         {{__('Back')}}
                     </a>
-
                 </div>
             </div>
         </div>
@@ -26,6 +25,5 @@
             </div>
         </div>
     </div>
-
 @endsection
 

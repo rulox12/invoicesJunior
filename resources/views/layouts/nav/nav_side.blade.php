@@ -13,17 +13,46 @@
                     {{__("Administrators")}}
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('invoices.index')}}">
-                    <span data-feather="file"></span>
-                    {{__("Invoices")}}
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="{{route('customers.index')}}">
                     <span data-feather="users"></span>
                     {{__("Customers")}}
                 </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('sellers.index')}}">
+                    <span data-feather="users"></span>
+                    {{__("Sellers")}}
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                    <span data-feather="file"></span>
+                    {{__("Invoices")}}
+                    <span data-feather="chevron-down"></span>
+                </a>
+                <ul class="collapse" id="pageSubmenu">
+                    <li>
+                        <a class="nav-link" href="{{route('invoices.index')}}">
+                            <span data-feather="eye"></span>
+                            {{__("View")}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('invoices.create')}}">
+                            <span data-feather="save"></span>
+                            {{__('Create')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('invoices.import')}}">
+                            <span data-feather="folder-plus"></span>
+                            {{__('Import')}}
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>

@@ -1,22 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('invoices.filter.__modal-filter')
     <div class="card text-center">
         <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <div class="p-2 h4">{{ __('Invoices')  }}</div>
-                <div class="p-2">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                               id="search">
-                    </form>
-                </div>
+            <div class="d-flex">
+                <div class="mr-auto p-2 h4">{{ __('Invoices')  }}</div>
+                @include('invoices.filter.__filter')
                 <div class="p-2">
                     <a href="{{route('invoices.create')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">
                         {{__('Create')}}
                     </a>
-
+                </div>
+                <div class="p-2">
+                    <a href="{{route('invoices.import')}}" class="btn btn btn-primary" role="button"
+                       aria-disabled="true">
+                        {{__('Import')}}
+                    </a>
                 </div>
             </div>
         </div>
@@ -25,6 +26,7 @@
             <table class="table" id="mytable">
                 <thead class="thead-dark">
                 <tr class="text-left">
+                    <th scope="col">{{__('Consecutive')}}</th>
                     <th scope="col">{{__('Expedition Date')}}</th>
                     <th scope="col">{{__('Type')}}</th>
                     <th scope="col">{{__('Total')}}</th>
@@ -36,6 +38,7 @@
                 <tbody>
                 @forelse($invoices as $invoice)
                     <tr class="text-left">
+                        <td>{{ $invoice->consecutive}}</td>
                         <td>{{ $invoice->expedition_date}}</td>
                         <td>{{ $invoice->type }}</td>
                         <td>{{ $invoice->total }}</td>
@@ -71,9 +74,59 @@
 
                 </tbody>
             </table>
-
+            {{ $invoices->appends($data)->links() }}
         </div>
     </div>
 
 @endsection
+@section('state')
+    <script>
+        $(document).ready(function () {
+            $('#type').on('change', function () {
+                if ($(this).val() == "state") {
+                    $('#value').replaceWith('' +
+                        '<select id="value" name="value" class="form-control">' +
+                        '@foreach(Config::get('invoices.state') as $state)' +
+                        '<option value="{{ $state }}">{{ __($state) }}</option>' +
+                        '@endforeach' +
+                        '</select>');
+                } else if ($(this).val() == "type") {
+                    $('#value').replaceWith('' +
+                        '<select id="value" class="form-control" name="value">' +
+                        '@foreach(Config::get('invoices.type') as $type)' +
+                        '<option value="{{ $type }}">{{ $type  }}</option>' +
+                        '@endforeach' +
+                        '</select>');
+                } else if ($(this).val() == "customer_id") {
+                    $('#value').replaceWith('' +
+                        '<select id="value" class="form-control" name="value">' +
+                        '@foreach($customers as $customer)' +
+                        '<option value="{{ $customer->id }}">{{ $customer->name  }}</option>' +
+                        '@endforeach' +
+                        '</select>');
+                } else if ($(this).val() == "seller_id") {
+                    $('#value').replaceWith('' +
+                        '<select id="value" class="form-control" name="value">' +
+                        '@foreach($sellers as $seller)' +
+                        '<option value="{{ $seller->id }}">{{ $seller->name  }}</option>' +
+                        '@endforeach' +
+                        '</select>');
+                } else if ($(this).val() == "other") {
+                    $("#myModal").modal();
+                    $('#value').replaceWith(''+
+                        '<input id="value" name="value" type="hidden" value="">');
+                } else {
+                    $('#value').replaceWith('' +
+                        '<input type="text"' +
+                        'class="form-control"' +
+                        'id="value"' +
+                        'name="value">'
+                    )
+                }
+            })
+        })
+    </script>
+@endsection
+
+
 
