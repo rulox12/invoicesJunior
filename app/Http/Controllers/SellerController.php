@@ -27,7 +27,8 @@ class SellerController extends Controller
 
     public function store(StoreSellerRequest $request)
     {
-        $data = array_merge($request->toArray(),
+        $data = array_merge(
+            $request->toArray(),
             [
                 "state" => true
             ]

@@ -50,8 +50,10 @@ class UserController extends Controller
     {
         $user->load(['role']);
 
-        return view('users.show',
-            ['user' => $user]);
+        return view(
+            'users.show',
+            ['user' => $user]
+        );
     }
 
     public function edit(User $user)

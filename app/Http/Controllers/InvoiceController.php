@@ -15,7 +15,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class InvoiceController extends Controller
 {
-
     public function index(Request $request)
     {
         $data = $request->all();
@@ -42,7 +41,8 @@ class InvoiceController extends Controller
     {
         date_default_timezone_set('UTC');
 
-        $data = array_merge($request->toArray(),
+        $data = array_merge(
+            $request->toArray(),
             [
                 "user_id" => auth()->user()->id,
                 "expedition_date" => date("Y-m-d H:i:s"),
@@ -81,7 +81,8 @@ class InvoiceController extends Controller
 
         $data = $request->validated();
 
-        $data = array_merge($data,
+        $data = array_merge(
+            $data,
             [
                 "user_id" => auth()->user()->id,
             ]
@@ -132,14 +133,14 @@ class InvoiceController extends Controller
             alert()->success(__('Successful'), __('It was imported correctly'));
 
             return redirect()->route('invoices.index');
-
         } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-
             $row = $e->failures()[0]->row() - 1;
             $error = $e->failures()[0]->errors()[0];
 
-            alert()->error(__('Error'),
-                __("Register number: ") . $row . " " . __("failure") . " " . $error)
+            alert()->error(
+                __('Error'),
+                __("Register number: ") . $row . " " . __("failure") . " " . $error
+            )
                 ->persistent(true);
 
             return redirect()->route('invoices.import');

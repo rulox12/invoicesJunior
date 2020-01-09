@@ -28,7 +28,8 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request)
     {
-        $data = array_merge($request->toArray(),
+        $data = array_merge(
+            $request->toArray(),
             [
                 "state" => true
             ]
@@ -86,5 +87,4 @@ class CustomerController extends Controller
             ->filter($type, $value)
             ->paginate(5);
     }
-
 }

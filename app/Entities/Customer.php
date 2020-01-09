@@ -28,8 +28,8 @@ class Customer extends Model
             return $query->where($type, 'LIKE', $value);
         }
 
-        if ($type && $value)
+        if ($type && $value) {
             return $query->where($type, 'LIKE', "%$value%");
+        }
     }
-
 }

@@ -48,14 +48,16 @@ class Invoice extends Model
 
     public function scopeFilter($query, $type, $value)
     {
-        if ($type && $value)
+        if ($type && $value) {
             return $query->where($type, 'LIKE', "%$value%");
+        }
     }
 
     public function scopeFilterDate($query, $type, $from, $to)
     {
-        if ($type && $from && $to)
+        if ($type && $from && $to) {
             return $query->where($type, '>=', $from)
                 ->where($type, '<=', $to);
+        }
     }
 }
