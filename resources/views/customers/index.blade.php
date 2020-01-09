@@ -3,26 +3,47 @@
 @section('content')
     <div class="card text-center">
         <div class="card-header">
-            <div class="d-flex justify-content-between">
-                <div class="p-2 h4">{{ __('Customers')  }}</div>
-                <div class="p-2">
-                    <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
-                               id="search">
-                    </form>
-                </div>
+            <div class="d-flex">
+                <div class="mr-auto p-2 h4">{{ __('Customers')  }}</div>
+                <form class="form-inline pull-right" method="GET" action="{{ route('customers.index') }}">
+                    <div class="p-2">
+                        <div class="form-group">
+
+                            <select id="type" class="form-control" name="type">
+                                <option value="name">{{__("Name")}}</option>
+                                <option value="surname">{{__("Surname")}}</option>
+                                <option value="document">{{__("Identification")}}</option>
+                                <option value="state">{{__("State")}}</option>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <div class="form-group">
+                            <input type="text"
+                                   class="form-control"
+                                   id="value"
+                                   placeholder=""
+                                   name="value">
+                        </div>
+                    </div>
+                    <div class="p-2">
+                        <button type="submit" class="btn btn-default">
+                                <span data-feather="search"></span>
+                        </button>
+
+                    </div>
+                </form>
                 <div class="p-2">
                     <a href="{{route('customers.create')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">
                         {{__('Create')}}
                     </a>
-
                 </div>
             </div>
         </div>
-
         <div class="card-body">
-            <table class="table" id="mytable">
+            <table class="table table-hover" id="mytable">
                 <thead class="thead-dark">
                 <tr class="text-left">
                     <th scope="col">{{__('Name')}}</th>
@@ -56,13 +77,13 @@
 
                                 @if($customer->state)
                                     <a class="nav-link" href="{{route('customers.toggle', $customer)}}">
-                                        <span data-feather="toggle-left"></span>
+                                        <span
+                                            data-feather="toggle-left">
+                                        </span>
                                     </a>
                                 @else
                                     <a class="btn btn-link" href="{{route('customers.toggle', $customer)}}">
                                         <span
-                                            aria-label="{{__('Is inactive')}}"
-                                            data-balloon-pos="up-right"
                                             data-feather="toggle-right">
                                         </span>
                                     </a>
@@ -71,14 +92,35 @@
                         </td>
                     </tr>
                 @empty
-
                 @endforelse
 
                 </tbody>
             </table>
-
+            {{ $customers->appends($data)->links() }}
         </div>
     </div>
 
 @endsection
 
+@section('state')
+    <script>
+        $(document).ready(function () {
+            $('#type').on('change', function () {
+                if ($(this).val() == "state") {
+                    $('#value').replaceWith('' +
+                        '<select id="value" name="value" class="form-control">' +
+                        '<option value="true">{{__("Active")}}</option>' +
+                        '<option value="false">{{__("Inactive")}}</option>' +
+                        '</select>');
+                }else{
+                    $('#value').replaceWith('' +
+                        '<input type="text"' +
+                        'class="form-control"' +
+                        'id="value"'+
+                        'name="value">'
+                    )
+                }
+            })
+        })
+    </script>
+@endsection
