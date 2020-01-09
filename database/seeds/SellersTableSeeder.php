@@ -25,5 +25,19 @@ class SellersTableSeeder extends Seeder
             'document' => '12012812',
             'state' => false,
         ]);
+        DB::table('sellers')->insert([
+            'name' => "Camila",
+            'surname' => "Villada",
+            'type_Document' => 'CC',
+            'document' => '3123203',
+            'state' => true,
+        ]);
+        DB::table('sellers')->insert([
+            'name' => "Cristina",
+            'surname' => "Lopez",
+            'type_Document' => 'NIT',
+            'document' => '2222222',
+            'state' => false,
+        ]);
     }
 }
