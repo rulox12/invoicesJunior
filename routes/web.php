@@ -42,6 +42,7 @@ Route::get('invoices/{invoice}/edit')->name('invoices.edit')->uses('InvoiceContr
 Route::patch('invoices/{invoice}')->name('invoices.update')->uses('InvoiceController@update');
 Route::get('invoices/{invoice}/status')->name('invoices.edit.status')->uses('InvoiceController@editStatus');
 Route::patch('invoices/status/{invoice}')->name('invoices.update.status')->uses('InvoiceController@updateStatus');
+Route::get('invoices/filter/date')->name('invoices.filter.date')->uses('InvoiceController@filterDate');
 
 
 Route::get('/', function () {

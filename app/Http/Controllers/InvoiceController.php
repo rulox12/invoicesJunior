@@ -9,17 +9,25 @@ use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Imports\InvoicesImport;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InvoiceController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('invoices.index', [
-            'invoices' => Invoice::paginate()
-        ]);
+        $data = $request->all();
+        $customers = Customer::all();
+        $sellers = Seller::all();
+
+        $invoices = $this->filterPagination(
+            $request->get('type'),
+            $request->get('value')
+        );
+
+        return view('invoices.index', compact(['invoices', 'data', 'customers', 'sellers']));
     }
 
     public function create()
@@ -33,6 +41,7 @@ class InvoiceController extends Controller
     public function store(StoreInvoiceRequest $request)
     {
         date_default_timezone_set('UTC');
+
         $data = array_merge($request->toArray(),
             [
                 "user_id" => auth()->user()->id,
@@ -42,7 +51,7 @@ class InvoiceController extends Controller
             ]
         );
 
-        $invoice = Invoice::create($data);
+        Invoice::create($data);
         alert()->success(__('Successful'), __('Stored record'));
 
         return redirect()->route('invoices.index');
@@ -85,12 +94,7 @@ class InvoiceController extends Controller
 
     public function editStatus(Invoice $invoice)
     {
-        $status = [
-            'FAILED' => 'Failed',
-            'REJETED' => 'Rejected',
-            'APPROVED' => 'Approved',
-            'PENDING' => 'Pending',
-        ];
+        $status = Config::get('invoices.state');
 
         return view('invoices.status', [
             'invoice' => $invoice,
@@ -101,10 +105,12 @@ class InvoiceController extends Controller
     public function updateStatus(Request $request, $id)
     {
         $data = [
-            'state' => $request->toArray()['state']
+            'state' => $request->get('state'),
+            "user_id" => auth()->user()->id,
         ];
 
-        Invoice::find($id)->update($data);
+        $invoice = Invoice::find($id);
+        $invoice->update($data);
 
         return redirect()->route('invoices.index');
     }
@@ -116,6 +122,10 @@ class InvoiceController extends Controller
 
     public function importExcelSave(Request $request)
     {
+        $request->validate([
+            'select_file' => 'required|max:50000|mimes:xlsx',
+        ]);
+
         try {
             Excel::import(new InvoicesImport, request()->file('select_file'));
 
@@ -134,5 +144,29 @@ class InvoiceController extends Controller
 
             return redirect()->route('invoices.import');
         }
+    }
+
+    public function filterDate(Request $request)
+    {
+        $data = $request->all();
+        $customers = Customer::all();
+        $sellers = Seller::all();
+
+        $invoices = Invoice::orderBy('id', 'DESC')
+            ->filterDate(
+                $request->get('type'),
+                $request->get('from'),
+                $request->get('to')
+            )
+            ->paginate(5);
+
+        return view('invoices.index', compact(['invoices', 'data', 'customers', 'sellers']));
+    }
+
+    public static function filterPagination($type, $value)
+    {
+        return Invoice::orderBy('id', 'DESC')
+            ->filter($type, $value)
+            ->paginate(5);
     }
 }
