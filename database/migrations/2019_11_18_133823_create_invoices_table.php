@@ -23,7 +23,7 @@ class CreateInvoicesTable extends Migration
             $table->string('tax');
             $table->string('description');
             $table->integer('total');
-            $table->string('state')->default('Pending');
+            $table->string('state')->default("Pending");
 
             $table->timestamps();
             $table->unsignedInteger('customer_id');

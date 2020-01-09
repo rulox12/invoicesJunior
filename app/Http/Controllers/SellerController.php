@@ -8,11 +8,16 @@ use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('sellers.index', [
-            'sellers' => seller::paginate()
-        ]);
+        $data = $request->all();
+
+        $sellers = $this->filterPagination(
+            $request->get('type'),
+            $request->get('value')
+        );
+
+        return view('sellers.index', compact('sellers', 'data'));
     }
 
     public function create()
@@ -22,7 +27,8 @@ class SellerController extends Controller
 
     public function store(StoreSellerRequest $request)
     {
-        $data = array_merge($request->toArray(),
+        $data = array_merge(
+            $request->toArray(),
             [
                 "state" => true
             ]
@@ -52,8 +58,8 @@ class SellerController extends Controller
 
         unset($data['_method'],$data['_token']);
 
-        seller::whereId($id)->update($data);
-        $seller = seller::find($id);
+        $seller = Seller::find($id);
+        $seller->update($data);
 
         return redirect()->route('sellers.show', $seller);
     }
@@ -70,5 +76,12 @@ class SellerController extends Controller
         $seller->update($data);
 
         return redirect()->route('sellers.index');
+    }
+
+    public static function filterPagination($type, $value)
+    {
+        return Seller::orderBy('id', 'DESC')
+            ->filter($type, $value)
+            ->paginate(5);
     }
 }

@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Customer;
-use App\Entities\Invoice;
-use App\Entities\Role;
 use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
-use App\Http\Requests\StoreUserRequest;
-use Cassandra\Custom;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('customers.index', [
-            'customers' => Customer::paginate()
-        ]);
+        $data = $request->all();
+
+        $customers = $this->filterPagination(
+            $request->get('type'),
+            $request->get('value')
+        );
+
+        return view('customers.index', compact('customers', 'data'));
     }
 
     public function create()
@@ -28,7 +28,8 @@ class CustomerController extends Controller
 
     public function store(StoreCustomerRequest $request)
     {
-        $data = array_merge($request->toArray(),
+        $data = array_merge(
+            $request->toArray(),
             [
                 "state" => true
             ]
@@ -36,7 +37,9 @@ class CustomerController extends Controller
 
         $customer = Customer::create($data);
 
-        return redirect()->route('customers.show', $customer);
+        alert()->success(__('Successful'), __('Stored record'));
+
+        return redirect()->route('customers.index', $customer);
     }
 
 
@@ -56,10 +59,10 @@ class CustomerController extends Controller
     {
         $data = $request->toArray();
 
-        unset($data['_method'],$data['_token']);
+        unset($data['_method'], $data['_token']);
 
-        Customer::whereId($id)->update($data);
         $customer = Customer::find($id);
+        $customer->update($data);
 
         return redirect()->route('customers.show', $customer);
     }
@@ -76,5 +79,12 @@ class CustomerController extends Controller
         $customer->update($data);
 
         return redirect()->route('customers.index');
+    }
+
+    public static function filterPagination($type, $value)
+    {
+        return Customer::orderBy('id', 'DESC')
+            ->filter($type, $value)
+            ->paginate(5);
     }
 }

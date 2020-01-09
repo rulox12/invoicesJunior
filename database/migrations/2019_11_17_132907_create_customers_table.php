@@ -22,7 +22,6 @@ class CreateCustomersTable extends Migration
             $table->boolean('state')->nullable();
 
             $table->timestamps();
-
         });
     }
 
