@@ -12,11 +12,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('users.index', [
-            'users' => User::paginate(),
-        ]);
+        $data = $request->all();
+        $roles = Role::all();
+
+        $users = $this->filterPagination(
+            $request->get('type'),
+            $request->get('value')
+        );
+        
+        return view('users.index', compact(['users', 'data', 'roles']));
     }
 
     public function create()
@@ -80,5 +86,12 @@ class UserController extends Controller
         $user->update($data);
 
         return redirect()->route('users.index');
+    }
+
+    public static function filterPagination($type, $value)
+    {
+        return User::orderBy('id', 'DESC')
+            ->filter($type, $value)
+            ->paginate(5);
     }
 }
