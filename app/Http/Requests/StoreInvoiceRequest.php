@@ -24,7 +24,6 @@ class StoreInvoiceRequest extends FormRequest
      */
     public function rules()
     {
-        $start_date = now();
         return [
             'due_date' => ['required', 'date', new DateHigherToday],
             'type' => 'required|string|min:1|max:50|regex:/^[\pL\s\-]+$/u',

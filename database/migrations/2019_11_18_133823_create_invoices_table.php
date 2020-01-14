@@ -24,15 +24,17 @@ class CreateInvoicesTable extends Migration
             $table->string('description');
             $table->integer('total');
             $table->string('state')->default("Pending");
-
+            $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+
             $table->unsignedInteger('customer_id');
             $table->unsignedInteger('seller_id');
-            $table->unsignedInteger('user_id');
 
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->foreign('seller_id')->references('id')->on('sellers');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 
