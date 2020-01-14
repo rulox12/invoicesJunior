@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Entities\Customer;
 use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    use RefreshDatabase;
+
     public function index(Request $request)
     {
         $data = $request->all();
-
         $customers = $this->filterPagination(
             $request->get('type'),
             $request->get('value')
@@ -26,16 +28,9 @@ class CustomerController extends Controller
         return view('customers.create');
     }
 
-    public function store(StoreCustomerRequest $request)
+    public function store(StoreCustomerRequest $request, Customer $customer)
     {
-        $data = array_merge(
-            $request->toArray(),
-            [
-                "state" => true
-            ]
-        );
-
-        $customer = Customer::create($data);
+        $customer = $this->saveData($request, new Customer());
 
         alert()->success(__('Successful'), __('Stored record'));
 
@@ -45,21 +40,17 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
-        return view('customers.show', compact('customer'))->with('status', 'Profile updated!');
+        return view('customers.show', compact('customer'));
     }
 
     public function edit(Customer $customer)
     {
-        return view('customers.edit', [
-            'customer' => $customer,
-        ]);
+        return view('customers.edit', compact('customer'));
     }
 
     public function update(StoreCustomerRequest $request, $id)
     {
-        $data = $request->toArray();
-
-        unset($data['_method'], $data['_token']);
+        $data = $request->validated();
 
         $customer = Customer::find($id);
         $customer->update($data);
@@ -86,5 +77,17 @@ class CustomerController extends Controller
         return Customer::orderBy('id', 'DESC')
             ->filter($type, $value)
             ->paginate(5);
+    }
+
+    private function saveData(Request $request, Customer $customer): Customer
+    {
+        $customer->name = $request->input('name');
+        $customer->surname = $request->input("surname");
+        $customer->type_document = $request->input("type_document");
+        $customer->document = $request->input("document");
+        $customer->state = 1;
+        $customer->save();
+
+        return $customer;
     }
 }
