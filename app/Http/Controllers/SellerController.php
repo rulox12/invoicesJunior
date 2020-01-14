@@ -3,15 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Seller;
-use App\Entities\User;
 use App\Http\Requests\StoreSellerRequest;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
-    use RefreshDatabase;
-
     public function index(Request $request)
     {
         $data = $request->all();
@@ -29,29 +25,38 @@ class SellerController extends Controller
         return view('sellers.create');
     }
 
-    public function store(StoreSellerRequest $request, Seller $customer)
+    public function store(StoreSellerRequest $request)
     {
-        $seller = $this->saveData($request, new Seller());
+        $data = array_merge(
+            $request->toArray(),
+            [
+                "state" => true
+            ]
+        );
 
-        alert()->success(__('Successful'), __('Stored record'));
+        $seller = seller::create($data);
 
-        return redirect()->route('sellers.index', $seller);
+        return redirect()->route('sellers.show', $seller);
     }
 
 
-    public function show(Seller $seller)
+    public function show(seller $seller)
     {
-        return view('sellers.show', compact('seller'));
+        return view('sellers.show', compact('seller'))->with('status', 'Profile updated!');
     }
 
-    public function edit(Seller $seller)
+    public function edit(seller $seller)
     {
-        return view('sellers.edit', compact('seller'));
+        return view('sellers.edit', [
+            'seller' => $seller,
+        ]);
     }
 
     public function update(StoreSellerRequest $request, $id)
     {
-        $data = $request->validated();
+        $data = $request->toArray();
+
+        unset($data['_method'],$data['_token']);
 
         $seller = Seller::find($id);
         $seller->update($data);
@@ -59,7 +64,7 @@ class SellerController extends Controller
         return redirect()->route('sellers.show', $seller);
     }
 
-    public function toggle(Seller $seller)
+    public function toggle(seller $seller)
     {
         if ($seller->state) {
             $data = ["state" => false];
@@ -67,7 +72,7 @@ class SellerController extends Controller
             $data = ["state" => true];
         }
 
-        $seller = Seller::find($seller->id);
+        $seller = seller::find($seller->id);
         $seller->update($data);
 
         return redirect()->route('sellers.index');
@@ -78,17 +83,5 @@ class SellerController extends Controller
         return Seller::orderBy('id', 'DESC')
             ->filter($type, $value)
             ->paginate(5);
-    }
-
-    private function saveData(Request $request, Seller $seller): Seller
-    {
-        $seller->name = $request->input('name');
-        $seller->surname = $request->input("surname");
-        $seller->type_document = $request->input("type_document");
-        $seller->document = $request->input("document");
-        $seller->state = 1;
-        $seller->save();
-
-        return $seller;
     }
 }
