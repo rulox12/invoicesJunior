@@ -23,6 +23,7 @@ class Invoice extends Model
         'description',
         'total',
         'customer_id',
+        'user_id',
         'seller_id',
         'state'
 
@@ -44,18 +45,19 @@ class Invoice extends Model
     }
 
     //scope
-    public function scopeFilterDate($query, $type, $from, $to)
-    {
-        if ($type && $from && $to) {
-            return $query->where($type, '>=', $from)
-                ->where($type, '<=', $to);
-        }
-    }
 
     public function scopeFilter($query, $type, $value)
     {
         if ($type && $value) {
             return $query->where($type, 'LIKE', "%$value%");
+        }
+    }
+
+    public function scopeFilterDate($query, $type, $from, $to)
+    {
+        if ($type && $from && $to) {
+            return $query->where($type, '>=', $from)
+                ->where($type, '<=', $to);
         }
     }
 }
