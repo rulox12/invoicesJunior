@@ -21,7 +21,7 @@ class UserController extends Controller
             $request->get('type'),
             $request->get('value')
         );
-        
+
         return view('users.index', compact(['users', 'data', 'roles']));
     }
 
@@ -35,12 +35,9 @@ class UserController extends Controller
 
     public function store(StoreUserRequest $request)
     {
-        $data = $request->toArray();
+        $user = $this->saveData($request, new User());
 
-        $data['password'] = Hash::make($data['password']);
-        $data['state'] = true;
-
-        $user = User::create($data);
+        alert()->success(__('Successful'), __('Stored record'));
 
         return redirect()->route('users.show', $user);
     }
@@ -95,5 +92,21 @@ class UserController extends Controller
         return User::orderBy('id', 'DESC')
             ->filter($type, $value)
             ->paginate(5);
+    }
+
+    private function saveData(Request $request, User $user): User
+    {
+        $user->name = $request->input('name');
+        $user->surname = $request->input("surname");
+        $user->email = $request->input("email");
+        $user->type_document = $request->input("type_document");
+        $user->document = $request->input("document");
+        $user->role_id = $request->input("role_id");
+        $user->state = true;
+        $user->password = Hash::make($request->input('password'));
+        $user->state = 1;
+        $user->save();
+
+        return $user;
     }
 }

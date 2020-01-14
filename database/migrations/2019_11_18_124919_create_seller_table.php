@@ -20,8 +20,13 @@ class CreateSellerTable extends Migration
             $table->string('name');
             $table->string('surname');
             $table->boolean('state')->nullable();
-
+            $table->unsignedInteger('created_by')->nullable();
+            $table->unsignedInteger('updated_by')->nullable();
             $table->timestamps();
+
+
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

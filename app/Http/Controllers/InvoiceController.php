@@ -8,6 +8,7 @@ use App\Entities\Seller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Imports\InvoicesImport;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Maatwebsite\Excel\Facades\Excel;
@@ -26,7 +27,10 @@ class InvoiceController extends Controller
             $request->get('value')
         );
 
-        return view('invoices.index', compact(['invoices', 'data', 'customers', 'sellers']));
+        return view(
+            'invoices.index',
+            compact(['invoices', 'data', 'customers', 'sellers'])
+        );
     }
 
     public function create()
@@ -37,19 +41,9 @@ class InvoiceController extends Controller
         ]);
     }
 
-    public function store(StoreInvoiceRequest $request)
+    public function store(StoreInvoiceRequest $request, Invoice $invoice)
     {
-        date_default_timezone_set('UTC');
-
-        $data = array_merge(
-            $request->toArray(),
-            [
-                "user_id" => auth()->user()->id,
-                "expedition_date" => date("Y-m-d H:i:s"),
-                "consecutive" => Invoice::count(),
-                "tax" => $request->toArray()['total'] * 0.16,
-            ]
-        );
+        $data = $request->validated();
 
         Invoice::create($data);
         alert()->success(__('Successful'), __('Stored record'));
@@ -77,18 +71,10 @@ class InvoiceController extends Controller
 
     public function update(UpdateInvoiceRequest $request, $id)
     {
-        date_default_timezone_set('UTC');
-
         $data = $request->validated();
 
-        $data = array_merge(
-            $data,
-            [
-                "user_id" => auth()->user()->id,
-            ]
-        );
-
-        $invoice = Invoice::find($id)->update($data);
+        $invoice = Invoice::find($id);
+        $invoice->update($data);
 
         return redirect()->route('invoices.show', $invoice);
     }
@@ -107,7 +93,6 @@ class InvoiceController extends Controller
     {
         $data = [
             'state' => $request->get('state'),
-            "user_id" => auth()->user()->id,
         ];
 
         $invoice = Invoice::find($id);
