@@ -1,12 +1,19 @@
 <!doctype html>
 <html lang="en">
 <meta charset="utf-8">
-
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+<meta name="generator" content="Jekyll v3.8.5">
 <title>{{__("Invoices")}}</title>
 
-<meta charset="utf-8">
-<title>{{__("Invoices")}}</title>
-<link rel="stylesheet" href="{{mix("vendor/css/app.css")}}">
+<link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/dashboard/">
+
+<!-- Bootstrap core CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Custom styles for this template -->
+<link href="{{asset('css/login.css')}}" rel="stylesheet">
 <body>
 <div class="container">
     <div class="row">
@@ -19,14 +26,12 @@
                             <input type="email" id="email" class="form-control" placeholder="Email address"
                                    name="email" value="{{ old('email') }}" required autofocus>
                             <label for="email">{{__('Email')}}</label>
-
                         </div>
                         @csrf
                         <div class="form-label-group">
                             <input type="password" id="password" class="form-control" placeholder="Password"
                                    name="password"  required>
                             <label for="password">{{__('Password')}}</label>
-
                         </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase"
                                 type="submit">{{__('Login')}}</button>

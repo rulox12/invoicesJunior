@@ -2,14 +2,6 @@
 
 namespace App\Providers;
 
-use App\Entities\Customer;
-use App\Entities\Invoice;
-use App\Entities\Seller;
-use App\Observer\UserObserver;
-use App\Observers\CustomerObserver;
-use App\Observers\InvoicesObserver;
-use App\Observers\SellerObserver;
-use App\User;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -31,9 +23,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Customer::observe(CustomerObserver::class);
-        Seller::observe(SellerObserver::class);
-        User::observe(UserObserver::class);
-        Invoice::observe(InvoicesObserver::class);
+        //
     }
 }
