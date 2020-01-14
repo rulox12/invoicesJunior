@@ -24,7 +24,7 @@ class InvoicesImport implements ToModel, WithHeadingRow, WithValidation
         $tax = $row['total'] * 0.16;
 
         return new Invoice([
-            'due_date' => $row['due_date'],
+            'due_date' => \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($row['due_date']),
             'type' => $row['type'],
             'tax' => $tax,
             'description' => $row['description'],
@@ -43,7 +43,6 @@ class InvoicesImport implements ToModel, WithHeadingRow, WithValidation
     public function rules(): array
     {
         return [
-            'due_date' => ['required', 'date', new DateHigherToday],
             'type' => 'required|string|min:1|max:50|regex:/^[\pL\s\-]+$/u',
             'description' => 'required|string|min:1|max:256|regex:/^[\pL\s\-]+$/u',
             'total' => 'required|integer',
