@@ -8,11 +8,11 @@ use App\Entities\Seller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
 use App\Imports\InvoicesImport;
-use Carbon\Carbon;
+use Facades\App\Repository\Sellers;
+use Facades\App\Repository\Customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Maatwebsite\Excel\Facades\Excel;
-use RealRashid\SweetAlert\Facades\Alert;
 
 class InvoiceController extends Controller
 {
@@ -35,10 +35,10 @@ class InvoiceController extends Controller
 
     public function create()
     {
-        return view('invoices.create', [
-            'customers' => Customer::all(),
-            'sellers' => Seller::all(),
-        ]);
+        $customers = Customers::all('name');
+        $sellers = Sellers::all('name');
+
+        return view('invoices.create', compact(['customers', 'sellers']));
     }
 
     public function store(StoreInvoiceRequest $request, Invoice $invoice)
@@ -60,12 +60,15 @@ class InvoiceController extends Controller
 
     public function edit(Invoice $invoice)
     {
+        $customers = Customers::all('name');
+        $sellers = Sellers::all('name');
+
         $invoice->load('user');
 
         return view('invoices.edit', [
             'invoice' => $invoice,
-            'customers' => Customer::all(),
-            'sellers' => Seller::all(),
+            'customers' => $customers,
+            'sellers' => $sellers,
         ]);
     }
 

@@ -87,6 +87,17 @@ return [
 
     ],
 
+    'user' => [
+        'key' => env('CACHA_KEY_USERS', 'USERS'),
+    ],
+
+    'customer' => [
+        'key' => env('CACHA_KEY_CUSTOMERS', 'CUSTOMERS'),
+    ],
+
+    'seller' => [
+        'key' => env('CACHA_KEY_SELLER', 'SELLERS'),
+    ],
     /*
     |--------------------------------------------------------------------------
     | Cache Key Prefix

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Customer;
 use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
+use Facades\App\Repository\Customers;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ class CustomerController extends Controller
             $request->get('value')
         );
 
-        return view('customers.index', compact('customers', 'data'));
+        return view('customers.index', compact(['customers', 'data']));
     }
 
     public function create()
@@ -31,6 +32,8 @@ class CustomerController extends Controller
     public function store(StoreCustomerRequest $request, Customer $customer)
     {
         $customer = $this->saveData($request, new Customer());
+
+        Customers::deleteChacheKey("name");
 
         alert()->success(__('Successful'), __('Stored record'));
 
@@ -51,6 +54,8 @@ class CustomerController extends Controller
     public function update(StoreCustomerRequest $request, $id)
     {
         $data = $request->validated();
+
+        Customers::deleteChacheKey("name");
 
         $customer = Customer::find($id);
         $customer->update($data);

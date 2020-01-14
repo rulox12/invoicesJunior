@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Entities\Seller;
 use App\Entities\User;
 use App\Http\Requests\StoreSellerRequest;
+use Facades\App\Repository\Sellers;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,8 @@ class SellerController extends Controller
     {
         $seller = $this->saveData($request, new Seller());
 
+        Sellers::deleteChacheKey("name");
+
         alert()->success(__('Successful'), __('Stored record'));
 
         return redirect()->route('sellers.index', $seller);
@@ -55,6 +58,8 @@ class SellerController extends Controller
 
         $seller = Seller::find($id);
         $seller->update($data);
+
+        Sellers::deleteChacheKey("name");
 
         return redirect()->route('sellers.show', $seller);
     }

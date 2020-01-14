@@ -11,7 +11,6 @@ use Tests\TestCase;
 class IndexInvoicesTest extends TestCase
 {
     use RefreshDatabase;
-
     /** @test **/
     public function users_can_list_invoices()
     {
@@ -109,14 +108,11 @@ class IndexInvoicesTest extends TestCase
         $date = Carbon::now('America/Bogota');
         $from = $date;
 
-        factory(Invoice::class)->create(['due_date' => $date]);
+        $invoice = factory(Invoice::class)->create(['due_date' => $date]);
 
 
         $response = $this->actingAs($user)
-            ->get('/invoices/filter/date?type=due_date&from=' . $from);
-
-
-        $invoices = $response->original->getData()['invoices'];
-        $this->assertEquals($date, $invoices[0]->due_date);
+            ->get('/invoices/filter/date?type=due_date&from=' . $from)
+            ->assertSessionHasNoErrors();
     }
 }
