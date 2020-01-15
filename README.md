@@ -37,7 +37,7 @@ sample file that you can download [here](https://drive.google.com/open?id=10b_xJ
 
 Note: to upload the invoices, customers and sellers must be created
 
-####Valid extension: 
+###Valid extension: 
 .xlsx
 
 ## Import Customer-Seller Excel
@@ -49,11 +49,11 @@ sample file that you can download [here](https://drive.google.com/open?id=1HZAcB
 | FIELD         	| VALUE           	| DESCRIPTION                                                         	|
 |---------------	|-----------------	|---------------------------------------------------------------------	|
 | name          	| Varchar(max:21) 	| Corresponds to the name of customer-seller example: daniel          	|
-| surname       	| Varchar(max:21) 	| Corresponds to the surname of customer-seller example: daniel       	|
+| surname       	| Varchar(max:21) 	| Corresponds to the surname of customer-seller example: betancur       	|
 | type_document 	| Varchar(max:3)  	| Corresponds to the type document of customer-seller example: CC NIT 	|
 | document      	| Integer         	| Corresponds to the document of customer-seller example: 123456789   	|
 
 Note: to upload the customer-sellers, customers and sellers must be created
 
-####Valid extension: 
+###Valid extension: 
 .xlsx
