@@ -3,13 +3,12 @@
 
 namespace Tests\Feature\Imports;
 
-
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Maatwebsite\Excel\Facades\Excel;
 use Tests\TestCase;
 
-class StoreImportsTest  extends TestCase
+class StoreImportsTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -26,5 +25,4 @@ class StoreImportsTest  extends TestCase
             ->assertSessionHasNoErrors()
             ->assertRedirect();
     }
-
 }
