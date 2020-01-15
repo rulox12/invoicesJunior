@@ -7,12 +7,10 @@ use App\Entities\Invoice;
 use App\Entities\Seller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
-use App\Imports\InvoicesImport;
 use Facades\App\Repository\Sellers;
 use Facades\App\Repository\Customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
-use Maatwebsite\Excel\Facades\Excel;
 
 class InvoiceController extends Controller
 {
@@ -102,37 +100,6 @@ class InvoiceController extends Controller
         $invoice->update($data);
 
         return redirect()->route('invoices.index');
-    }
-
-    public function importExcelShow()
-    {
-        return view('invoices.import');
-    }
-
-    public function importExcelSave(Request $request)
-    {
-        $request->validate([
-            'select_file' => 'required|max:50000|mimes:xlsx',
-        ]);
-
-        try {
-            Excel::import(new InvoicesImport, request()->file('select_file'));
-
-            alert()->success(__('Successful'), __('It was imported correctly'));
-
-            return redirect()->route('invoices.index');
-        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
-            $row = $e->failures()[0]->row() - 1;
-            $error = $e->failures()[0]->errors()[0];
-
-            alert()->error(
-                __('Error'),
-                __("Register number: ") . $row . " " . __("failure") . " " . $error
-            )
-                ->persistent(true);
-
-            return redirect()->route('invoices.import');
-        }
     }
 
     public function filterDate(Request $request)

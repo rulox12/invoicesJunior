@@ -11,8 +11,6 @@ use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
-    use RefreshDatabase;
-
     public function index(Request $request)
     {
         $data = $request->all();

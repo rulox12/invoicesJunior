@@ -139,9 +139,9 @@ return [
         | Transaction Handler
         |--------------------------------------------------------------------------
         |
-        | By default the import is wrapped in a transaction. This is useful
-        | for when an import may fail and you want to retry it. With the
-        | transactions, the previous import gets rolled-back.
+        | By default the imports is wrapped in a transaction. This is useful
+        | for when an imports may fail and you want to retry it. With the
+        | transactions, the previous imports gets rolled-back.
         |
         | You can disable the transaction handler by setting this to null.
         | Or you can choose a custom made transaction handler here.

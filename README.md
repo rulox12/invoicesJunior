@@ -15,6 +15,7 @@ composer clear-cache
 composer dump-autoload
 npm install
 npm run dev
+php artisan config:cache
 php artisan serve
 ```
 

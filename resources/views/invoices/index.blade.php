@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="p-2">
-                    <a href="{{route('invoices.import')}}" class="btn btn btn-primary" role="button"
+                    <a href="{{route('imports.index')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">
                         {{__('Import')}}
                     </a>
