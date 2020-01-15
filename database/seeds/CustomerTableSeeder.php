@@ -11,19 +11,6 @@ class CustomerTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('customers')->insert([
-            'name' => "Estefania",
-            'surname' => "Guerrero",
-            'type_Document' => 'CC',
-            'document' => '102222203',
-            'state' => true,
-        ]);
-        DB::table('customers')->insert([
-            'name' => "Cristina",
-            'surname' => "Lopez",
-            'type_Document' => 'CC',
-            'document' => '29273912',
-            'state' => false,
-        ]);
+        factory(App\Entities\Customer::class, 200)->create();
     }
 }
