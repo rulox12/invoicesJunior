@@ -33,8 +33,6 @@ Route::patch('sellers/{seller}')->name('sellers.update')->uses('sellerController
 //Invoice
 
 Route::get('/invoices')->name('invoices.index')->uses('InvoiceController@index')->middleware('auth');
-Route::get('/invoices/import')->name('invoices.import')->uses('InvoiceController@importExcelShow')->middleware('auth');
-Route::patch('/invoices/importSave')->name('invoices.importSave')->uses('InvoiceController@importExcelSave')->middleware('auth');
 Route::get('invoices/create')->name('invoices.create')->uses('InvoiceController@create')->middleware('auth');
 Route::post('invoices/store')->name('invoices.store')->uses('InvoiceController@store')->middleware('auth');
 Route::get('invoices/{invoice}')->name('invoices.show')->uses('InvoiceController@show')->middleware('auth');
@@ -43,6 +41,12 @@ Route::patch('invoices/{invoice}')->name('invoices.update')->uses('InvoiceContro
 Route::get('invoices/{invoice}/status')->name('invoices.edit.status')->uses('InvoiceController@editStatus')->middleware('auth');
 Route::patch('invoices/status/{invoice}')->name('invoices.update.status')->uses('InvoiceController@updateStatus')->middleware('auth');
 Route::get('invoices/filter/date')->name('invoices.filter.date')->uses('InvoiceController@filterDate')->middleware('auth');
+
+//Import
+
+Route::get('/imports')->name('imports.index')->uses('ImportController@index')->middleware('auth');
+Route::post('imports/store')->name('imports.store')->uses('ImportController@store')->middleware('auth');
+
 
 Auth::routes();
 

@@ -73,6 +73,12 @@
     "Select": "Seleccione",
     "Filter": "Filtro",
     "View": "Ver",
-    "Search": "Buscar"
+    "Invoice": "Factura",
+    "Search": "Buscar",
+    "Export": "Exportar",
+    "File": "Archivo",
+    "Import or Export": "Importar o Exportar",
+    "Important that your file is well created": "Importante que su archivo esté bien creado",
+    "file":"archivo"
 
 }
