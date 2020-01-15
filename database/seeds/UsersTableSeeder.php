@@ -12,6 +12,16 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('users')->insert([
+            'name' => "daniel",
+            'surname' => "camilo",
+            'email' => 'user@gmail.com',
+            'type_Document' => 'CC',
+            'document' => '1036343123',
+            'password' => bcrypt('user123'),
+            'role_id' => 2,
+            'state' => true,
+        ]);
         factory(App\User::class, 200)->create();
     }
 }
