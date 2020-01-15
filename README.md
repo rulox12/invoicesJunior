@@ -37,7 +37,7 @@ sample file that you can download [here](https://drive.google.com/open?id=10b_xJ
 
 Note: to upload the invoices, customers and sellers must be created
 
-###Valid extension: 
+### Valid extension: 
 .xlsx
 
 ## Import Customer-Seller Excel
@@ -55,5 +55,5 @@ sample file that you can download [here](https://drive.google.com/open?id=1HZAcB
 
 Note: to upload the customer-sellers, customers and sellers must be created
 
-###Valid extension: 
+### Valid extension: 
 .xlsx
