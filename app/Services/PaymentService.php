@@ -31,6 +31,7 @@ class PaymentService
 
     public function createPayment(PaymentRequest $request)
     {
+        dd($request);
         $this->client->request($request->toArray());
     }
 

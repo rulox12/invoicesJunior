@@ -43,6 +43,11 @@ class Invoice extends Model
         return $this->belongsTo(Seller::class);
     }
 
+    public function isPending($status)
+    {
+        return $status == config('state.');
+    }
+
     //scope
     public function scopeFilterDate($query, $type, $from, $to)
     {
