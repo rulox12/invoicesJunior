@@ -6,9 +6,11 @@ class PaymentRequest
 {
     private $reference;
 
-    private $document;
+    private $customer;
 
     private $amount;
+
+    private $description;
 
     private $expiration;
 
@@ -18,17 +20,12 @@ class PaymentRequest
 
     private $userAgent;
 
-    public function __construct(
-        int $reference,
-        string $document,
-        float $amount,
-        int $description
-    )
+    public function __construct($data)
     {
-        $this->reference = $reference;
-        $this->document = $document;
-        $this->description = $description;
-        $this->amount = $amount;
+        $this->reference = $data['reference'];
+        $this->customer = $data['customer'];
+        $this->description = $data['description'];
+        $this->amount = $data['amount'];
     }
 
     /**
@@ -76,7 +73,7 @@ class PaymentRequest
      */
     public function getIpAddress()
     {
-        return $_SERVER['HTTP_CLIENT_IP'];
+        return $_SERVER['REMOTE_ADDR'];
     }
 
     /**
@@ -93,8 +90,14 @@ class PaymentRequest
     public function toArray()
     {
         return [
+            'buyer' => [
+                'name' => $this->customer->name,
+                'surname' => $this->customer->surname,
+                'type_document' => $this->customer->type_document,
+                'document' => $this->customer->document,
+            ],
             'payment' => [
-                'reference' => $this->reference,
+                'reference' => time(),
                 'description' => $this->description,
                 'amount' => [
                     'currency' => 'COP',
@@ -102,9 +105,10 @@ class PaymentRequest
                 ],
             ],
             'expiration' => $this->getExpirationDate(),
-            'returnUrl' => $this->getReturUrl() . $this->reference,
+            'returnUrl' => $this->getReturUrl() . '/' . $this->reference,
             'ipAddress' => $this->getIpAddress(),
-            'userAgent' => $this->getUserAgent()
+            'userAgent' => $this->getUserAgent(),
+            'payment_concept' => $this->getReference()
         ];
     }
 }

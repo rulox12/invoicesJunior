@@ -16,9 +16,9 @@ class PaymentService
     public function __construct()
     {
         $this->settings = [
-            config('payment.login') => '',
-            config('payment.trankey') => '',
-            config('url') => ''
+            'login' => '6dd490faf9cb87a9862245da41170ff2',
+            'tranKey' => '024h1IlD',
+            'url' => 'https://test.placetopay.com/redirection',
         ];
 
         try {
@@ -31,8 +31,23 @@ class PaymentService
 
     public function createPayment(PaymentRequest $request)
     {
-        dd($request);
-        $this->client->request($request->toArray());
+        $this->client = new PlacetoPay([
+            'login' => '6dd490faf9cb87a9862245da41170ff2',
+            'tranKey' => '024h1IlD',
+            'url' => 'https://test.placetopay.com/redirection',
+        ]);
+        $response = $this->client->request($request->toArray());
+
+        if ($response->isSuccessful()) {
+            // In order to use the functions please refer to the Dnetix\Redirection\Message\RedirectInformation class
+            dd(dd($response));
+            if ($response->status()->isApproved()) {
+                dd($response);
+            }
+        } else {
+            // There was some error with the connection so check the message
+            print_r($response->status()->message() . "\n");
+        }
     }
 
 
