@@ -16,14 +16,10 @@ class Payment extends Model
         'request_id',
         'reference',
         'description',
-        'expiration',
         'return_url',
         'ip_address',
-        'tax',
         'description',
-        'total',
-        'customer_id',
-        'seller_id',
-        'state'
+        'state',
+        'invoice_id'
     ];
 }

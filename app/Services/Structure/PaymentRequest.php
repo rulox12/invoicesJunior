@@ -47,6 +47,14 @@ class PaymentRequest
     /**
      * @return mixed
      */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getAmount()
     {
         return $this->amount;
@@ -90,24 +98,24 @@ class PaymentRequest
     public function toArray()
     {
         return [
-            'buyer' => [
-                'name' => $this->customer->name,
-                'surname' => $this->customer->surname,
+            'buyer'           => [
+                'name'          => $this->customer->name,
+                'surname'       => $this->customer->surname,
                 'type_document' => $this->customer->type_document,
-                'document' => $this->customer->document,
+                'document'      => $this->customer->document,
             ],
-            'payment' => [
-                'reference' => time(),
+            'payment'         => [
+                'reference'   => time() . '-' . $this->getReference(),
                 'description' => $this->description,
-                'amount' => [
+                'amount'      => [
                     'currency' => 'COP',
-                    'total' => $this->amount,
+                    'total'    => $this->amount,
                 ],
             ],
-            'expiration' => $this->getExpirationDate(),
-            'returnUrl' => $this->getReturUrl() . '/' . $this->reference,
-            'ipAddress' => $this->getIpAddress(),
-            'userAgent' => $this->getUserAgent(),
+            'expiration'      => $this->getExpirationDate(),
+            'returnUrl'       => $this->getReturUrl() . $this->getReference(),
+            'ipAddress'       => $this->getIpAddress(),
+            'userAgent'       => $this->getUserAgent(),
             'payment_concept' => $this->getReference()
         ];
     }

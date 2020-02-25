@@ -6,51 +6,42 @@ use Dnetix\Redirection\Entities\Status;
 
 class PaymentResponse
 {
-    /** @var Status $status */
-    public $status;
+    private $requestId;
+    private $processUrl;
 
+    public $response;
 
-    public function __construct(array $data)
+    public function __construct($data)
     {
-        $this->init($data);
+        $this->requestId = $data->requestId;
+        $this->processUrl = $data->processUrl;
+
+        $this->response = $data;
     }
 
-    private function init($data)
+    public function getUrl()
     {
-        $statusFields = [
-            'status', 'message', 'reason', 'date',
-        ];
-
-        if (!array_key_exists('status', $data)) {
-            throw new InvalidServiceResponse(sprintf('Service response without status'));
-        }
-
-        foreach ($statusFields as $field) {
-            if (!array_key_exists($field, $data['status'])) {
-                throw new InvalidServiceResponse(sprintf('Status incomplete, "%s" not found', $field));
-            }
-        }
-
-        $this->status = new Status($data['status']);
+        return $this->processUrl;
     }
 
-    public function isSuccessFul()
+    public function getRequestId()
     {
-        if (is_null($this->status)) {
-            return false;
-        }
+        return $this->requestId;
+    }
 
-        return $this->status->isSuccessful();
+    public function getStatusOk()
+    {
+        return $this->response->isSuccessful();
     }
 
     public static function fromError($message = '')
     {
         return new static([
             'status' => [
-                'status' => 'ER',
+                'status'  => 'ER',
                 'message' => $message,
-                'reason' => 'XX',
-                'date' => date('c'),
+                'reason'  => 'XX',
+                'date'    => date('c'),
             ],
         ]);
     }

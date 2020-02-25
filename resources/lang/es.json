@@ -84,5 +84,6 @@
   "News Customers": "Clientes nuevos",
   "News Sellers": "Vendedores nuevos",
   "Payment": "Pago",
-  "Pay":"Pagar"
+  "Pay":"Pagar",
+  "Your invoice is pending or payment time has expired":"Su factura esta pendiente o ya vencio el tiempo de pago"
 }

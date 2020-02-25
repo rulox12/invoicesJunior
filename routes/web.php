@@ -50,6 +50,7 @@ Route::post('imports/store')->name('imports.store')->uses('ImportController@stor
 //Payment
 
 Route::get('payments/store/{invoice}')->name('payments.store')->uses('PaymentController@store')->middleware('auth');
+Route::get('payments/returnURL/{reference}')->name('payments.return')->uses('PaymentController@returnWebCheckout')->middleware('auth');
 
 
 Auth::routes();
