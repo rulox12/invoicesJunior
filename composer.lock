@@ -202,6 +202,7 @@
         },
         {
             "name": "dnetix/redirection",
+
             "version": "1.0.3",
             "source": {
                 "type": "git",
@@ -212,6 +213,7 @@
                 "type": "zip",
                 "url": "https://api.github.com/repos/dnetix/redirection/zipball/954e7985f5aa567c0af5ace97f2b9e3bb37e335f",
                 "reference": "954e7985f5aa567c0af5ace97f2b9e3bb37e335f",
+
                 "shasum": ""
             },
             "require": {
@@ -242,7 +244,9 @@
                 }
             ],
             "description": "Library to connect with PlacetoPay Redirection service",
+
             "time": "2020-02-21T15:40:07+00:00"
+
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
