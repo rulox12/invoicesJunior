@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Entities\Invoice;
 use App\Entities\Payment;
 use App\Services\PaymentService;
 use App\Services\Structure\PaymentRequest;
 use Dnetix\Redirection\Entities\Status;
 
+
 class PaymentController extends Controller
 {
     /**
+
      * @param Invoice $invoice
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -75,5 +78,4 @@ class PaymentController extends Controller
     {
         dd($reference);
     }
-
 }
