@@ -44,13 +44,11 @@
                         <td>{{ $invoice->total }}</td>
                         <td>{{ $invoice->customer->name }}</td>
                         <td>
-                            @if($invoice->state == 'Approved' )
+                            @if($invoice->state == \App\Entities\Invoice::STATUS_APPROVED )
                                 <span class="badge badge-success">{{ __('Approved') }}</span>
-                            @elseif($invoice->state == 'Rejected' )
-                                <span class="badge badge-danger">{{ __('Rejected') }}</span>
-                            @elseif($invoice->state == 'Failed' )
-                                <span class="badge badge-danger">{{ __('Failed') }}</span>
-                            @elseif($invoice->state == 'Pending')
+                            @elseif($invoice->state == \App\Entities\Invoice::STATUS_IN_PROCESS )
+                                <span class="badge badge-danger">{{ __('In Process') }}</span>
+                            @elseif($invoice->state == \App\Entities\Invoice::STATUS_PENDING )
                                 <span class="badge badge-warning">{{ __('Pending') }}</span>
                             @endif
                         </td>
@@ -113,7 +111,7 @@
                         '</select>');
                 } else if ($(this).val() == "other") {
                     $("#myModal").modal();
-                    $('#value').replaceWith(''+
+                    $('#value').replaceWith('' +
                         '<input id="value" name="value" type="hidden" value="">');
                 } else {
                     $('#value').replaceWith('' +
