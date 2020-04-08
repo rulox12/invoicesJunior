@@ -130,6 +130,4 @@ class PaymentRequest
             'payment_concept' => $this->getPaymentConcept()
         );
     }
-
-
 }

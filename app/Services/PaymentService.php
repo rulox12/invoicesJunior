@@ -36,7 +36,6 @@ class PaymentService
         $response = $this->client->request($request->toArray());
 
         if ($response->isSuccessful()) {
-
             return [
                 'status' => Status::ST_OK,
                 'request' => $request,
@@ -46,7 +45,6 @@ class PaymentService
         return [
             'status' => Status::ST_FAILED,
         ];
-
     }
 
     public function getInfoPayment($requestId)
@@ -54,7 +52,6 @@ class PaymentService
         $response = $this->client->query($requestId);
 
         if ($response->isSuccessful()) {
-
             return [
                 'status' => Status::ST_OK,
                 'response' => $response->status(),
@@ -63,8 +60,5 @@ class PaymentService
         return [
             'status' => Status::ST_FAILED,
         ];
-
     }
-
-
 }
