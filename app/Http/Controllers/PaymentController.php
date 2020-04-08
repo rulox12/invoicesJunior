@@ -74,7 +74,7 @@ class PaymentController extends Controller
         $data = [
             'request_id' => $responseService['response']->getRequestId(),
             'reference' => $responseService['request']->getReference(),
-            'state' => InvoiceStatuses::PENDING,
+            'state' => Status::ST_PENDING,
             'description' => $responseService['request']->getDescription(),
             'return_url' => $responseService['response']->getUrl(),
             'ip_address' => $responseService['request']->toArray()['ipAddress'],

@@ -60,8 +60,8 @@
                                 <a class="nav-link" href="{{route('invoices.edit', $invoice)}}">
                                     <span data-feather="edit"></span>
                                 </a>
-                                <a class="nav-link" href="{{route('invoices.edit.status', $invoice)}}">
-                                    <span data-feather="arrow-right-circle"></span>
+                                <a class="nav-link" href="{{route('payments.store', $invoice)}}">
+                                    <span data-feather="dollar-sign"></span>
                                 </a>
                             </div>
                         </td>
