@@ -47,6 +47,11 @@ Route::get('invoices/filter/date')->name('invoices.filter.date')->uses('InvoiceC
 Route::get('/imports')->name('imports.index')->uses('ImportController@index')->middleware('auth');
 Route::post('imports/store')->name('imports.store')->uses('ImportController@store')->middleware('auth');
 
+//Payment
+
+Route::get('payments/store/{invoice}')->name('payments.store')->uses('PaymentController@store')->middleware('auth');
+Route::get('payments/returnURL/{reference}')->name('payments.return')->uses('PaymentController@returnWebCheckout')->middleware('auth');
+
 
 Auth::routes();
 
