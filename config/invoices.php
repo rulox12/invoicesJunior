@@ -10,4 +10,5 @@ return [
     'type' => [
         0 => "Factura de Venta	",
     ],
+    'Pending' => 'Pending',
 ];

@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <div class="p-2">
-                    <a href="{{route('invoices.import')}}" class="btn btn btn-primary" role="button"
+                    <a href="{{route('imports.index')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">
                         {{__('Import')}}
                     </a>
@@ -62,8 +62,8 @@
                                 <a class="nav-link" href="{{route('invoices.edit', $invoice)}}">
                                     <span data-feather="edit"></span>
                                 </a>
-                                <a class="nav-link" href="{{route('invoices.edit.status', $invoice)}}">
-                                    <span data-feather="arrow-right-circle"></span>
+                                <a class="nav-link" href="{{route('payments.store', $invoice)}}">
+                                    <span data-feather="dollar-sign"></span>
                                 </a>
                             </div>
                         </td>

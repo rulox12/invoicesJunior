@@ -15,7 +15,9 @@ composer clear-cache
 composer dump-autoload
 npm install
 npm run dev
+php artisan config:cache
 php artisan serve
+php artisan vendor:publish --tag=charts_config
 ```
 
 
@@ -36,3 +38,23 @@ sample file that you can download [here](https://drive.google.com/open?id=10b_xJ
 
 Note: to upload the invoices, customers and sellers must be created
 
+### Valid extension: 
+.xlsx
+
+## Import Customer-Seller Excel
+
+It is important to manage the structure that can be seen in the 
+sample file that you can download [here](https://drive.google.com/open?id=1HZAcBO_KUyLal8SZsFE5dPAn6a5T5sPJ)
+#### Field Description.
+
+| FIELD         	| VALUE           	| DESCRIPTION                                                         	|
+|---------------	|-----------------	|---------------------------------------------------------------------	|
+| name          	| Varchar(max:21) 	| Corresponds to the name of customer-seller example: daniel          	|
+| surname       	| Varchar(max:21) 	| Corresponds to the surname of customer-seller example: betancur       	|
+| type_document 	| Varchar(max:3)  	| Corresponds to the type document of customer-seller example: CC NIT 	|
+| document      	| Integer         	| Corresponds to the document of customer-seller example: 123456789   	|
+
+Note: to upload the customer-sellers, customers and sellers must be created
+
+### Valid extension: 
+.xlsx
