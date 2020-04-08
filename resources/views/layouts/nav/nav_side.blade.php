@@ -14,7 +14,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a class="nav-link" href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
                     <span data-feather="users"></span>
                     {{__("Customers")}}
                     <span data-feather="chevron-down"></span>
@@ -41,7 +42,8 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a class="nav-link" href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
                     <span data-feather="users"></span>
                     {{__("Sellers")}}
                     <span data-feather="chevron-down"></span>
@@ -68,7 +70,8 @@
                 </ul>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <a class="nav-link" href="#pageSubmenu" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
                     <span data-feather="file"></span>
                     {{__("Invoices")}}
                     <span data-feather="chevron-down"></span>
@@ -93,6 +96,12 @@
                         </a>
                     </li>
                 </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{route('payments.index')}}">
+                    <span data-feather="credit-card"></span>
+                    {{__("Payments")}}
+                </a>
             </li>
         </ul>
     </div>
