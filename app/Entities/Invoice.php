@@ -2,7 +2,6 @@
 
 namespace App\Entities;
 
-use App\Constants\InvoiceStatuses;
 use App\User;
 use Dnetix\Redirection\Entities\Status;
 use Illuminate\Database\Eloquent\Model;
@@ -32,7 +31,6 @@ class Invoice extends Model
         'customer_id',
         'seller_id',
         'state'
-
     ];
 
     public function customer()
