@@ -6,7 +6,6 @@ use App\Entities\Customer;
 use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
 use Facades\App\Repository\Customers;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
