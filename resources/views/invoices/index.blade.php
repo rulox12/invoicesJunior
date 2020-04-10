@@ -5,7 +5,7 @@
     <div class="card text-center">
         <div class="card-header">
             <div class="d-flex">
-                <div class="mr-auto p-2 h4">{{ __('Invoices')  }}</div>
+                <div class="mr-auto p-2 h2">{{ __('Invoices')  }}</div>
                 @include('invoices.filter.__filter')
                 <div class="p-2">
                     <a href="{{route('invoices.create')}}" class="btn btn btn-primary" role="button"
@@ -36,7 +36,8 @@
                 </tr>
                 </thead>
                 <tbody>
-                @forelse($invoices as $invoice)
+
+               @forelse($invoices as $invoice)
                     <tr class="text-left">
                         <td>{{ $invoice->consecutive}}</td>
                         <td>{{ $invoice->expedition_date}}</td>

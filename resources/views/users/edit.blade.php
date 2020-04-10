@@ -4,7 +4,7 @@
     <div class="card ">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <div class="p-2 h4">{{ __('Edit User')  }}</div>
+                <div class="p-2 h2">{{ __('Edit User')  }}</div>
 
                 <div class="p-2">
                     <a href="{{route('users.index')}}" class="btn btn btn-secondary" role="button"

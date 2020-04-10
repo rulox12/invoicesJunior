@@ -1,13 +1,13 @@
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+<nav class="col-md-2 bg-light sidebar">
     <div class="sidebar-sticky">
         <ul class="nav flex-column">
-            <li class="nav-item">
+            <li class="nav-item hr">
                 <a class="nav-link" href={{route('home.index')}}>
                     <span data-feather="home"></span>
                     {{__('Dashboard')}}
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item hr">
                 <a class="nav-link" href="{{route('users.index')}}">
                     <span data-feather="user-plus"></span>
                     {{__("Administrators")}}
@@ -93,6 +93,12 @@
                         <a class="nav-link" href="{{route('imports.index')}}">
                             <span data-feather="folder-plus"></span>
                             {{__('Import')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('exports.index')}}">
+                            <span data-feather="folder-plus"></span>
+                            {{__('Export')}}
                         </a>
                     </li>
                 </ul>

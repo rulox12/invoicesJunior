@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="card-header">
                 <div class="d-flex">
-                    <div class="mr-auto p-2 h4">{{ __('Payments')  }}</div>
+                    <div class="mr-auto p-2 h2">{{ __('Payments')  }}</div>
                 </div>
             </div>
             <table class="table table-hover" id="mytable">

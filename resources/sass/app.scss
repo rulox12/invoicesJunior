@@ -1,3 +1,10 @@
+//awesome
+
+$fa-font-path: "../webfonts";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '~@fortawesome/fontawesome-free/scss/solid.scss';
+@import '~@fortawesome/fontawesome-free/scss/brands.scss';
+@import '~@fortawesome/fontawesome-free/scss/regular.scss';
 // Fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
@@ -8,9 +15,7 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
-body {
-    font-size: .875rem;
-}
+
 
 .feather {
     width: 16px;
@@ -32,13 +37,17 @@ body {
     box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
 }
 
+.bg-dark {
+    background-color: #343a40 !important;
+}
 .sidebar-sticky {
     position: relative;
     top: 0;
     height: calc(100vh - 48px);
     padding-top: .5rem;
     overflow-x: hidden;
-    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    overflow-y: auto;
+    background: #594f8d;/* Scrollable contents if viewport is shorter than content. */
 }
 
 @supports ((position: -webkit-sticky) or (position: sticky)) {
@@ -50,7 +59,6 @@ body {
 
 .sidebar .nav-link {
     font-weight: 500;
-    color: #333;
 }
 
 .sidebar .nav-link .feather {
@@ -106,7 +114,7 @@ body {
 
 .form-control-dark {
     color: #fff;
-    background-color: rgba(255, 255, 255, .1);
+    background-color: rgba(147, 212, 21, 0.57);
     border-color: rgba(255, 255, 255, .1);
 }
 
@@ -168,11 +176,12 @@ body {
 }
 
 html {
-    background-color: #56baed;
+    background-color: #ded9ed;
 }
 
 body {
-    font-family: "Poppins", sans-serif;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    font-size: 105% !important;
     height: 100vh;
 }
 
@@ -362,3 +371,92 @@ body {
     }
 }
 
+.btn{
+    border: none; /* Remove borders */
+    color: white; /* White text */
+    padding: 12px 16px; /* Some padding */
+    font-size: 16px; /* Set a font size */
+    cursor: pointer; /* Mouse pointer on hover */
+}
+
+.btn:hover {
+    color: white;
+}
+.btn-txt {
+    background-color: DodgerBlue; /* Blue background */
+}
+/* Darker background on mouse-over */
+.btn-txt:hover {
+    background-color: #50bde1;
+}
+.btn-excel {
+    background-color: #009802; /* Blue background */
+}
+
+/* Darker background on mouse-over */
+.btn-excel:hover {
+    background-color: #49ef55;
+}
+.btn-pdf {
+    background-color: #ff001e; /* Blue background */
+}
+
+/* Darker background on mouse-over */
+.btn-pdf:hover {
+    background-color: #ef5f6c;
+}
+.btn-html {
+    background-color: #ff680d; /* Blue background */
+}
+
+/* Darker background on mouse-over */
+.btn-html:hover {
+    background-color: #e19d2e;
+}
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+body{
+    background-color: #f3f5f9;
+}
+
+.sidebar-sticky {
+    background: #4b4276;
+}
+
+.sidebar-sticky h2 {
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.sidebar-sticky ul li {
+    padding: 10px;
+    border-bottom: 1px solid #bdb8d7;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.sidebar-sticky ul li a {
+    color: #bdb8d7;
+}
+
+.sidebar-sticky ul li a .fas {
+    width: 25px;
+}
+
+.sidebar-sticky ul li:hover {
+    background-color: #594f8d;
+}
+
+.sidebar-sticky ul li:hover a {
+    color: #fff;
+}
