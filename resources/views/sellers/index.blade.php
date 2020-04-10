@@ -4,7 +4,7 @@
     <div class="card text-center">
         <div class="card-header">
             <div class="d-flex">
-                <div class="mr-auto p-2 h4">{{ __('Sellers')  }}</div>
+                <div class="mr-auto p-2 h2">{{ __('Sellers')  }}</div>
                 <form class="form-inline pull-right" method="GET" action="{{ route('sellers.index') }}">
                     <div class="p-2">
                         <div class="form-group">

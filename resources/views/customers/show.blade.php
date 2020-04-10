@@ -4,7 +4,7 @@
     <div class="card card-default">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <div class="mr-auto p-2 h4">{{ __('Customer Details') }}</div>
+                <div class="mr-auto p-2 h2">{{ __('Customer Details') }}</div>
                 <div class="p-2">
                     <a href="{{route('customers.edit', $customer)}}" class="btn btn btn-secondary" role="button"
                        aria-disabled="true">
