@@ -3,7 +3,26 @@
 @section('content')
     <div class="card card-default">
         <div class="card-header">
+            <div class="card-header">
+                <div class="d-flex justify-content-between">
+                    <div class="mr-auto p-2 h2">{{ __('Seller Details') }}</div>
+                    @can('seller edit')
+                        <div class="p-2">
+                            <a href="{{route('sellers.edit', $seller)}}" class="btn btn btn-secondary" role="button"
+                               aria-disabled="true">
+                                {{ __('Edit') }}
+                            </a>
+                        </div>
+                    @endcan
+                    <div class="p-2">
+                        <a href="{{route('sellers.index')}}" class="btn btn btn-secondary" role="button"
+                           aria-disabled="false">
+                            {{ __('Back') }}
+                        </a>
+                    </div>
 
+                </div>
+            </div>
         </div>
 
         <div class="card-body">

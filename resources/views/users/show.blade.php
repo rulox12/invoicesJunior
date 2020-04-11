@@ -5,12 +5,14 @@
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <div class="mr-auto p-2 h2">{{ $user->name ." ". $user->surname }}</div>
-                <div class="p-2">
-                    <a href="{{route('users.edit', $user)}}" class="btn btn btn-secondary" role="button"
-                       aria-disabled="true">
-                        {{ __('Edit') }}
-                    </a>
-                </div>
+                @can('user edit')
+                    <div class="p-2">
+                        <a href="{{route('users.edit', $user)}}" class="btn btn btn-secondary" role="button"
+                           aria-disabled="true">
+                            {{ __('Edit') }}
+                        </a>
+                    </div>
+                @endcan
                 <div class="p-2">
                     <a href="{{route('users.index')}}" class="btn btn btn-secondary" role="button"
                        aria-disabled="false">

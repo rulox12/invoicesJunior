@@ -94,5 +94,12 @@
   "Your invoice is approved or payment time has expired":"Su factura esta aprobada o ya vencio el tiempo de pago",
   "back": "Atras",
   "successful": "Exitoso",
-  "Permissions": "Permisos"
+  "Permissions": "Permisos",
+  "Entity": "Entidad",
+  "User": "Usuario",
+  "Date":"Fecha",
+  "Create Seller": "Crear Vendedor",
+  "Edit Role": "Editar Rol",
+  "Update Role": "Actualizar Rol",
+  "Create Role": "Crear Rol"
 }

@@ -20,8 +20,8 @@
                name="description" required>
     </div>
 
-    <div class="form-group col-md-6 ">
-        <h3 style="color: #98dfb6">{{__('Permissions')}}</h3>
+    <div class="form-group col-md-12">
+        <h3 style="">{{__('Permissions')}}</h3>
         <div class="card">
             <div class="card-body">
                 @foreach($permission as $value)

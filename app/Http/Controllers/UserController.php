@@ -12,6 +12,17 @@ use Spatie\Permission\Models\Role;
 class UserController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:user list|user create|user edit|user delete', ['only' => ['index','show']]);
+        $this->middleware('permission:user create', ['only' => ['create','store']]);
+        $this->middleware('permission:user edit', ['only' => ['edit','update']]);
+    }
+    /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

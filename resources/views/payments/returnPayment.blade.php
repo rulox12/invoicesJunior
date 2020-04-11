@@ -20,11 +20,11 @@
                 <p class="card-text">{{ __($payment->state) }}</p>
             </div>
             <div class="card-footer">
-                <a href="{{$payment->getReturnUrl()}}" type="button" class="btn btn-outline-secondary">
+                <a href="{{$payment->getReturnUrl()}}" type="button" class="btn btn-secondary">
                     <span data-feather="chevron-left"></span>
                     {{__('back')}}
                 </a>
-                <a href="{{route('invoices.show', $payment->getInvoiceId())}}" type="button" class="btn btn-outline-secondary">
+                <a href="{{route('invoices.show', $payment->getInvoiceId())}}" type="button" class="btn btn-secondary">
                     {{__('Invoice')}}
                 </a>
 

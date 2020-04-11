@@ -2,16 +2,18 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <button class="btn btn-outline-secondary mr-auto h4" style="margin-top: 4px" data-toggle="collapse"
+                <button class="btn btn-secondary mr-auto h4" style="margin-top: 4px" data-toggle="collapse"
                         data-target="#collapseHome"
                         aria-expanded="false"
                         aria-controls="collapseHome">{{ __('Invoice Details') }}</button>
-                <div class="p-2">
-                    <a href="{{route('invoices.edit', $invoice)}}" class="btn btn btn-secondary" role="button"
-                       aria-disabled="true">
-                        {{ __('Edit') }}
-                    </a>
-                </div>
+                @can('invoice edit')
+                    <div class="p-2">
+                        <a href="{{route('invoices.edit', $invoice)}}" class="btn btn btn-secondary" role="button"
+                           aria-disabled="true">
+                            {{ __('Edit') }}
+                        </a>
+                    </div>
+                @endcan
                 <div class="p-2">
                     <a href="{{route('invoices.index')}}" class="btn btn btn-secondary" role="button"
                        aria-disabled="false">
@@ -64,7 +66,8 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <button class="btn btn-outline-secondary mr-auto h4" style="margin-top: 4px" data-toggle="collapse" data-target="#collapseOne"
+                <button class="btn btn-warning" style="margin-top: 4px;color:white" data-toggle="collapse"
+                        data-target="#collapseOne"
                         aria-expanded="false"
                         aria-controls="collapseOne">{{ __('Customer Details') }}</button>
             </div>
@@ -100,7 +103,8 @@
     <div class="card">
         <div class="card-header" id="headingTwo">
             <div class="d-flex justify-content-between">
-                <button class="btn btn-outline-secondary mr-auto h4" style="margin-top: 4px" data-toggle="collapse" data-target="#collapseTwo"
+                <button class="btn btn-info mr-auto h4" style="margin-top: 4px" data-toggle="collapse"
+                        data-target="#collapseTwo"
                         aria-expanded="false"
                         aria-controls="collapseTwo">{{ __('Seller Details') }}</button>
             </div>
@@ -135,7 +139,8 @@
     </div>
     <div class="card">
         <div class="card-header" id="headingThree">
-            <button class="btn btn-outline-secondary mr-auto h4" style="margin-top: 4px" data-toggle="collapse" data-target="#collapseThree"
+            <button class="btn btn-success mr-auto h4" style="margin-top: 4px" data-toggle="collapse"
+                    data-target="#collapseThree"
                     aria-expanded="false"
                     aria-controls="collapseThree">{{ __('Payments') }}</button>
 
@@ -150,7 +155,7 @@
                             <th scope="col">{{__('Reference')}}</th>
                             <th scope="col">{{__('Date')}}</th>
                             <th scope="col">{{__('State')}}</th>
-                            <th scope="col">{{__('Actions')}}</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -167,13 +172,7 @@
                                         <span class="badge badge-danger">{{ __($payment->state) }}</span>
                                     @endif
                                 </td>
-                                <td class="text-left">
-                                    <div class="btn-group mr-1" role="group" aria-label="First group">
-                                        <a class="nav-link" href="{{ $payment->return_url }}">
-                                            <span data-feather="fast-forward"></span>
-                                        </a>
-                                    </div>
-                                </td>
+
                             </tr>
                         @empty
                         @endforelse

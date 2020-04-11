@@ -27,18 +27,20 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <button type="submit" class="btn btn-default">
+                        <button type="submit" class="btn btn-secondary">
                             <span data-feather="search"></span>
                         </button>
 
                     </div>
                 </form>
-                <div class="p-2">
-                    <a href="{{route('users.create')}}" class="btn btn btn-primary" role="button"
-                       aria-disabled="true">
-                        {{__('Create')}}
-                    </a>
-                </div>
+                @can('user create')
+                    <div class="p-2">
+                        <a href="{{route('users.create')}}" class="btn btn btn-primary" role="button"
+                           aria-disabled="true">
+                            {{__('Create')}}
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -70,19 +72,20 @@
                                 <a class="nav-link" href="{{route('users.show', $user)}}">
                                     <span data-feather="eye"></span>
                                 </a>
-
-                                <a class="nav-link" href="{{route('users.edit', $user)}}">
-                                    <span data-feather="edit"></span>
-                                </a>
-                                @if($user->state)
-                                    <a class="nav-link" href="{{route('users.delete', $user)}}">
-                                        <span data-feather="user-x"></span>
+                                @can('user edit')
+                                    <a class="nav-link" href="{{route('users.edit', $user)}}">
+                                        <span data-feather="edit"></span>
                                     </a>
-                                @else
-                                    <a class="nav-link" href="{{route('users.delete', $user)}}">
-                                        <span data-feather="user-check"></span>
-                                    </a>
-                                @endif
+                                    @if($user->state)
+                                        <a class="nav-link" href="{{route('users.delete', $user)}}">
+                                            <span data-feather="user-x"></span>
+                                        </a>
+                                    @else
+                                        <a class="nav-link" href="{{route('users.delete', $user)}}">
+                                            <span data-feather="user-check"></span>
+                                        </a>
+                                    @endif
+                                @endcan
                             </div>
                         </td>
                     </tr>

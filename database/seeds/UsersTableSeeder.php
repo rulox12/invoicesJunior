@@ -24,14 +24,15 @@ class UsersTableSeeder extends Seeder
             'state' => true,
         ]);
 
-        $role = Role::create(['name' => 'Admin']);
+        $role = Role::create([
+            'name' => 'SuperAdmin',
+            'description' => 'Rol que cuenta con todos los permisos'
+        ]);
 
         $permissions = Permission::pluck('id', 'id')->all();
 
         $role->syncPermissions($permissions);
 
         $user->assignRole([$role->id]);
-
-        factory(App\User::class, 200)->create();
     }
 }

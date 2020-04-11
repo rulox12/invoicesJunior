@@ -11,6 +11,17 @@ use Illuminate\Http\Request;
 
 class SellerController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:seller list|seller create|seller edit|seller delete', ['only' => ['index','show']]);
+        $this->middleware('permission:seller create', ['only' => ['create','store']]);
+        $this->middleware('permission:seller edit', ['only' => ['edit','update']]);
+    }
     public function index(Request $request)
     {
         $data = $request->all();

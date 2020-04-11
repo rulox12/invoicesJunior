@@ -5,7 +5,7 @@
     <div class="card text-center">
         <div class="card-header">
             <div class="d-flex">
-                <div class="mr-auto p-2 h2">{{ __('Role')  }}</div>
+                <div class="mr-auto p-2 h2">{{ __('Roles')  }}</div>
                 <div class="p-2">
                     <a href="{{route('roles.create')}}" class="btn btn btn-primary" role="button"
                        aria-disabled="true">

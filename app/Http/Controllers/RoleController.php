@@ -16,10 +16,11 @@ class RoleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:role-list|role-create|role-edit|role-delete', ['only' => ['index','show']]);
-        $this->middleware('permission:role-create', ['only' => ['create','store']]);
-        $this->middleware('permission:role-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:role list|role create|role edit|role delete', ['only' => ['index', 'show']]);
+        $this->middleware('permission:role create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:role edit', ['only' => ['edit', 'update']]);
     }
+
     /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -35,8 +36,8 @@ class RoleController extends Controller
     public function create()
     {
         $permission = Permission::get();
-        $rolePermissions =[];
-        return view('roles.create', compact(['permission','rolePermissions']));
+        $rolePermissions = [];
+        return view('roles.create', compact(['permission', 'rolePermissions']));
     }
 
     public function store(Request $request)
@@ -60,7 +61,7 @@ class RoleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
