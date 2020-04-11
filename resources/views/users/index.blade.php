@@ -14,7 +14,6 @@
                                 <option value="document">{{__("Identification")}}</option>
                                 <option value="email">{{__("Email")}}</option>
                                 <option value="state">{{__("State")}}</option>
-                                <option value="role_id">{{__("Role")}}</option>
                             </select>
                         </div>
                     </div>
@@ -80,12 +79,8 @@
                                         <span data-feather="user-x"></span>
                                     </a>
                                 @else
-                                    <a class="btn btn-link" href="{{route('users.delete', $user)}}">
-                                        <span
-                                            aria-label="{{__('Is inactive')}}"
-                                            data-balloon-pos="up-right"
-                                            data-feather="user-check">
-                                        </span>
+                                    <a class="nav-link" href="{{route('users.delete', $user)}}">
+                                        <span data-feather="user-check"></span>
                                     </a>
                                 @endif
                             </div>
@@ -112,13 +107,7 @@
                         '<option value="true">{{__("Active")}}</option>' +
                         '<option value="false">{{__("Inactive")}}</option>' +
                         '</select>');
-                } else if ($(this).val() == "role_id") {
-                    $('#value').replaceWith('' +
-                        '<select id="value" class="form-control" name="value">' +
-                        '@foreach($roles as $role)' +
-                        '<option value="{{ $role->id }}">{{ $role->name  }}</option>' +
-                        '@endforeach' +
-                        '</select>');
+
                 } else {
                     $('#value').replaceWith('' +
                         '<input type="text"' +
