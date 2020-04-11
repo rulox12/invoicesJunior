@@ -31,13 +31,15 @@
                                 <span class="badge badge-danger">{{ __($payment->state) }}</span>
                             @endif
                         </td>
-                        <td class="text-left">
-                            <div class="btn-group mr-1" role="group" aria-label="First group">
-                                <a class="nav-link" href="{{ $payment->return_url }}">
-                                    <span data-feather="fast-forward"></span>
-                                </a>
-                            </div>
-                        </td>
+                        @can('payment detail')
+                            <td class="text-left">
+                                <div class="btn-group mr-1" role="group" aria-label="First group">
+                                    <a class="nav-link" href="{{ $payment->return_url }}">
+                                        <span data-feather="fast-forward"></span>
+                                    </a>
+                                </div>
+                            </td>
+                        @endcan
                     </tr>
                 @empty
                 @endforelse

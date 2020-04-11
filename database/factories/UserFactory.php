@@ -18,7 +18,6 @@ $factory->define(User::class, function (Faker $faker) {
         'type_document' => $types_document[$typeRandom],
         'document' => $faker->numberBetween($min = 100000, $max = 9000000),
         'password' => $faker->password,
-        'role_id' => factory(App\Entities\Role::class)->create()->id,
         'state' => $faker->boolean,
         "created_at" => Carbon::now()->addMonths($monthRandom)
     ];

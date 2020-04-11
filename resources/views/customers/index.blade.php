@@ -28,18 +28,20 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <button type="submit" class="btn btn-default">
-                                <span data-feather="search"></span>
+                        <button type="submit" class="btn btn-secondary">
+                            <span data-feather="search"></span>
                         </button>
 
                     </div>
                 </form>
-                <div class="p-2">
-                    <a href="{{route('customers.create')}}" class="btn btn btn-primary" role="button"
-                       aria-disabled="true">
-                        {{__('Create')}}
-                    </a>
-                </div>
+                @can('customer create')
+                    <div class="p-2">
+                        <a href="{{route('customers.create')}}" class="btn btn btn-primary" role="button"
+                           aria-disabled="true">
+                            {{__('Create')}}
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -69,25 +71,20 @@
                                 <a class="nav-link" href="{{route('customers.show', $customer)}}">
                                     <span data-feather="eye"></span>
                                 </a>
-
-                                <a class="nav-link" href="{{route('customers.edit', $customer)}}">
-                                    <span data-feather="edit"></span>
-                                </a>
-
-
-                                @if($customer->state)
-                                    <a class="nav-link" href="{{route('customers.toggle', $customer)}}">
-                                        <span
-                                            data-feather="toggle-left">
-                                        </span>
+                                @can('customer edit')
+                                    <a class="nav-link" href="{{route('customers.edit', $customer)}}">
+                                        <span data-feather="edit"></span>
                                     </a>
-                                @else
-                                    <a class="btn btn-link" href="{{route('customers.toggle', $customer)}}">
-                                        <span
-                                            data-feather="toggle-right">
-                                        </span>
-                                    </a>
-                                @endif
+                                    @if($customer->state)
+                                        <a class="nav-link" href="{{route('customers.toggle', $customer)}}">
+                                            <i class="fa fa-toggle-on"></i>
+                                        </a>
+                                    @else
+                                        <a class="nav-link" href="{{route('customers.toggle', $customer)}}">
+                                            <i class="fa fa-toggle-off"></i>
+                                        </a>
+                                    @endif
+                                @endcan
                             </div>
                         </td>
                     </tr>
@@ -112,11 +109,11 @@
                         '<option value="true">{{__("Active")}}</option>' +
                         '<option value="false">{{__("Inactive")}}</option>' +
                         '</select>');
-                }else{
+                } else {
                     $('#value').replaceWith('' +
                         '<input type="text"' +
                         'class="form-control"' +
-                        'id="value"'+
+                        'id="value"' +
                         'name="value">'
                     )
                 }

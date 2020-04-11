@@ -7,18 +7,14 @@
             <div class="d-flex">
                 <div class="mr-auto p-2 h2">{{ __('Invoices')  }}</div>
                 @include('invoices.filter.__filter')
-                <div class="p-2">
-                    <a href="{{route('invoices.create')}}" class="btn btn btn-primary" role="button"
-                       aria-disabled="true">
-                        {{__('Create')}}
-                    </a>
-                </div>
-                <div class="p-2">
-                    <a href="{{route('imports.index')}}" class="btn btn btn-primary" role="button"
-                       aria-disabled="true">
-                        {{__('Import')}}
-                    </a>
-                </div>
+                @can('invoice create')
+                    <div class="p-2">
+                        <a href="{{route('invoices.create')}}" class="btn btn btn-primary" role="button"
+                           aria-disabled="true">
+                            {{__('Create')}}
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
 
@@ -37,7 +33,7 @@
                 </thead>
                 <tbody>
 
-               @forelse($invoices as $invoice)
+                @forelse($invoices as $invoice)
                     <tr class="text-left">
                         <td>{{ $invoice->consecutive}}</td>
                         <td>{{ $invoice->expedition_date}}</td>
@@ -58,12 +54,16 @@
                                 <a class="nav-link" href="{{ route('invoices.show', $invoice) }}">
                                     <span data-feather="eye"></span>
                                 </a>
-                                <a class="nav-link" href="{{route('invoices.edit', $invoice)}}">
-                                    <span data-feather="edit"></span>
-                                </a>
-                                <a class="nav-link" href="{{route('payments.store', $invoice)}}">
-                                    <span data-feather="dollar-sign"></span>
-                                </a>
+                                @can('invoice edit')
+                                    <a class="nav-link" href="{{route('invoices.edit', $invoice)}}">
+                                        <span data-feather="edit"></span>
+                                    </a>
+                                @endcan
+                                @can('payment generate')
+                                    <a class="nav-link" href="{{route('payments.store', $invoice)}}">
+                                        <span data-feather="dollar-sign"></span>
+                                    </a>
+                                @endcan
                             </div>
                         </td>
                     </tr>

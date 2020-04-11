@@ -111,7 +111,6 @@ class PaymentController extends Controller
                 return view('payments.returnPayment', compact('payment'));
             } catch (\Exception $e) {
                 //log
-                dd($e);
             }
         }
     }

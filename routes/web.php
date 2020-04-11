@@ -42,6 +42,17 @@ Route::get('invoices/{invoice}/status')->name('invoices.edit.status')->uses('Inv
 Route::patch('invoices/status/{invoice}')->name('invoices.update.status')->uses('InvoiceController@updateStatus')->middleware('auth');
 Route::get('invoices/filter/date')->name('invoices.filter.date')->uses('InvoiceController@filterDate')->middleware('auth');
 
+
+//Rol
+
+Route::get('/roles')->name('roles.index')->uses('RoleController@index')->middleware('auth');
+Route::get('roles/create')->name('roles.create')->uses('RoleController@create')->middleware('auth');
+Route::post('roles/store')->name('roles.store')->uses('RoleController@store')->middleware('auth');
+Route::get('roles/{role}')->name('roles.show')->uses('RoleController@show')->middleware('auth');
+Route::get('roles/{role}/edit')->name('roles.edit')->uses('RoleController@edit')->middleware('auth');
+Route::get('roles/{role}/toggle')->name('roles.toggle')->uses('RoleController@toggle')->middleware('auth');
+Route::patch('roles/{role}')->name('roles.update')->uses('RoleController@update')->middleware('auth');
+
 //Import
 
 Route::get('/imports')->name('imports.index')->uses('ImportController@index')->middleware('auth');

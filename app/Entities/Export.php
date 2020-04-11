@@ -54,5 +54,4 @@ class Export extends Model
             return $query->where($type, 'LIKE', "%$value%");
         }
     }
-
 }

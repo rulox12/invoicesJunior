@@ -16,6 +16,16 @@ use Illuminate\Support\Facades\Config;
 class InvoiceController extends Controller
 {
     /**
+     * Display a listing of the resource.
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:invoice list|invoice create|invoice edit', ['only' => ['index','show']]);
+        $this->middleware('permission:invoice create', ['only' => ['create','store']]);
+        $this->middleware('permission:invoice edit', ['only' => ['edit','update']]);
+    }
+    /**
      * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

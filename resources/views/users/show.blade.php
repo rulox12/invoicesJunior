@@ -4,13 +4,15 @@
     <div class="card card-default">
         <div class="card-header">
             <div class="d-flex justify-content-between">
-                <div class="mr-auto p-2 h2">{{ __('Users Details') }}</div>
-                <div class="p-2">
-                    <a href="{{route('users.edit', $user)}}" class="btn btn btn-secondary" role="button"
-                       aria-disabled="true">
-                        {{ __('Edit') }}
-                    </a>
-                </div>
+                <div class="mr-auto p-2 h2">{{ $user->name ." ". $user->surname }}</div>
+                @can('user edit')
+                    <div class="p-2">
+                        <a href="{{route('users.edit', $user)}}" class="btn btn btn-secondary" role="button"
+                           aria-disabled="true">
+                            {{ __('Edit') }}
+                        </a>
+                    </div>
+                @endcan
                 <div class="p-2">
                     <a href="{{route('users.index')}}" class="btn btn btn-secondary" role="button"
                        aria-disabled="false">
@@ -23,7 +25,6 @@
 
         <div class="card-body">
             <div class="container-fluid">
-                <div class="col-md-12 text-center"><h4>{{ $user->name ." ". $user->surname }}</h4></div>
                 <br>
                 <dl class="row text-center">
                     <dt class="col-md-2 text-left">{{ __('Identification') }}:</dt>
@@ -36,9 +37,11 @@
                         <dt class="col-md-2 text-left">{{ __('Type Document') }}:</dt>
                         <dd class="col-md-4 text-left">{{ $user->type_document }}</dd>
                     @endif
-                    @if($user->role->name )
-                        <dt class="col-md-2 text-left">{{ __('Role') }}:</dt>
-                        <dd class="col-md-4 text-left">{{ $user->role->name }}</dd>
+                    @if(!empty($user->getRoleNames()))
+                        <dt class="col-md-2 text-left">{{ __('Type Document') }}:</dt>
+                        @foreach($user->getRoleNames() as $roleName)
+                            <label class="badge badge-success">{{ $roleName }}</label>
+                        @endforeach
                     @endif
                 </dl>
 

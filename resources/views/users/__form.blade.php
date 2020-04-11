@@ -18,19 +18,6 @@
                required>
     </div>
     <div class="form-group col-md-4 text-left">
-        <label class="h6" for="role_id">{{__('Role')}}</label>
-        <select id="role_id" class="form-control" name="role_id">
-            @foreach($roles as $role)
-                <option value="{{ $role->id }} " {{ old('role_id',$user->role_id ?? '' ) ==
-                        $role->id ? ' selected' : '' }}>
-                    {{ $role->name  }}
-                </option>
-            @endforeach
-        </select>
-    </div>
-</div>
-<div class="form-row">
-    <div class="form-group col-md-4 text-left">
         <label class="h6" for="name">{{__('Name')}}</label>
         <input type="text"
                class="form-control"
@@ -40,6 +27,10 @@
                value="{{ old('name',$user->name ?? '') }}"
                required>
     </div>
+
+</div>
+<div class="form-row">
+
     <div class="form-group col-md-4 text-left">
         <label class="h6" for="surname">{{__('Surname')}}</label>
         <input type="text"
@@ -60,9 +51,8 @@
                name="email"
                required>
     </div>
-</div>
-@if(isset($index))
-    <div class="form-row">
+
+    @if(isset($index))
         <div class="form-group col-md-4 text-left">
             <label class="h6" for="password">{{__('Password')}}</label>
             <input type="password" class="form-control" id="password" placeholder="{{__('Password')}}"
@@ -73,8 +63,22 @@
             <input type="password" class="form-control" id="password2" placeholder="{{__('Confirm password')}}"
                    name="password2" required>
         </div>
+    @endif
+
+    <div class="form-group col-md-4 text-left">
+        <label class="h6" for="role_id">{{__('Role')}}</label>
+        <select class="custom-select" multiple data-live-search="true" name="roles[]">
+            @foreach($roles as $role)
+                <option value="{{ $role }}"
+                        {{ in_array($role, $userRole) ? 'selected' : '' }}>
+                    {{ $role  }}
+                </option>
+            @endforeach
+        </select>
+
     </div>
-@endif
+</div>
+
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
