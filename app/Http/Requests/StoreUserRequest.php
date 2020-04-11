@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|string|min:1|max:20|regex:/^[\pL\s\-]+$/u',
             'surname' => 'required|string|min:1|max:20|regex:/^[\pL\s\-]+$/u',
             'email' => 'required|email:rfc,dns',
-            'role_id' => 'required|exists:roles,id',
+            //'role' => 'required|exists:roles,id',
             'type_document' => 'required|string|min:2|max:3',
             'document' => 'required|integer',
         ];

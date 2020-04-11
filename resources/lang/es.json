@@ -93,5 +93,6 @@
   "Payments":"Pagos",
   "Your invoice is approved or payment time has expired":"Su factura esta aprobada o ya vencio el tiempo de pago",
   "back": "Atras",
-  "successful": "Exitoso"
+  "successful": "Exitoso",
+  "Permissions": "Permisos"
 }

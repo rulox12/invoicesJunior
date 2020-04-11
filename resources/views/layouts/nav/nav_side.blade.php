@@ -109,6 +109,40 @@
                     {{__("Payments")}}
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#pageSubmenuRoles" data-toggle="collapse" aria-expanded="false"
+                   class="dropdown-toggle">
+                    <i class="fas fa-user-shield"></i>
+                    {{__("Roles")}}
+                    <span data-feather="chevron-down"></span>
+                </a>
+                <ul class="collapse" id="pageSubmenuRoles">
+                    <li>
+                        <a class="nav-link" href="{{route('roles.index')}}">
+                            <span data-feather="eye"></span>
+                            {{__("View")}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('invoices.create')}}">
+                            <span data-feather="save"></span>
+                            {{__('Create')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('imports.index')}}">
+                            <span data-feather="folder-plus"></span>
+                            {{__('Import')}}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="{{route('exports.index')}}">
+                            <span data-feather="folder-plus"></span>
+                            {{__('Export')}}
+                        </a>
+                    </li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
