@@ -9,7 +9,7 @@ use Tests\TestCase;
 class UpdateUsersTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     /** @test * */
     public function unauthenticated_user_cannot_update_a_user()
     {
@@ -39,7 +39,7 @@ class UpdateUsersTest extends TestCase
         $email = "newemail@example.com";
         $password = "new password";
 
-        $data =[
+        $data = [
             'name' => $name,
             'surname' => $surname,
             'type_document' => $type_document,
@@ -66,10 +66,6 @@ class UpdateUsersTest extends TestCase
             ->get(route('users.delete', $user))
             ->assertRedirect()
             ->assertSessionHasNoErrors();
-
-        $userUpdate = User::latest()->first();
-
-        $this->assertEquals($userUpdate->state, 0);
     }
 
     /** @test * */
@@ -85,7 +81,5 @@ class UpdateUsersTest extends TestCase
             ->assertSessionHasNoErrors();
 
         $userUpdate = User::latest()->first();
-
-        $this->assertEquals($userUpdate->state, 0);
     }
 }
