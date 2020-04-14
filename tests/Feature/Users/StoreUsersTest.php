@@ -2,8 +2,6 @@
 
 namespace Tests\Feature\Users;
 
-use App\Entities\Role;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -20,7 +18,6 @@ class StoreUsersTest extends TestCase
             'document' => $this->faker->numberBetween($min = 100000, $max = 9000000),
             'email' => $this->faker->email,
             'password' => $this->faker->password,
-            'role_id' => factory(Role::class)->create()->id,
             'state' => $this->faker->boolean
         ];
     }
@@ -28,7 +25,7 @@ class StoreUsersTest extends TestCase
     /** @test **/
     public function save_a_user_with_a_logged_in_user()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('users.store'),
                 $this->newUser()
@@ -56,7 +53,7 @@ class StoreUsersTest extends TestCase
     {
         $data = [];
 
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('users.store'),
                 $data
@@ -68,7 +65,7 @@ class StoreUsersTest extends TestCase
     /** @test * */
     public function saves_user_who_was_created_that_user()
     {
-        $userCreate = factory(User::class)->create();
+        $userCreate = $this->createSuperAdminUser();
 
         $this
             ->actingAs($userCreate)

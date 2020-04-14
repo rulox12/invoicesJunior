@@ -25,7 +25,7 @@ class StoreSellersTest extends TestCase
     /** @test **/
     public function save_a_seller_with_a_logged_in_user()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('sellers.store'),
                 $this->newSeller()
@@ -53,7 +53,7 @@ class StoreSellersTest extends TestCase
     {
         $data = [];
 
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('sellers.store'),
                 $data
@@ -65,7 +65,7 @@ class StoreSellersTest extends TestCase
     /** @test **/
     public function saves_user_who_was_created_that_seller()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
 
         $this
             ->actingAs($user)

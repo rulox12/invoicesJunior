@@ -15,7 +15,7 @@ class EditCustomersTest extends TestCase
     /** @test **/
     public function user_login_can_edit_customers()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $customer = factory(Customer::class)->create();
 
@@ -23,9 +23,11 @@ class EditCustomersTest extends TestCase
             ->get(route('customers.edit', $customer))
             ->assertSuccessful();
 
-        $this->assertEquals($customer->id, $response->original->getData()['customer']->id);
-        $this->assertEquals($customer->name, $response->original->getData()['customer']->name);
-        $this->assertEquals($customer->surname, $response->original->getData()['customer']->surname);
+        $getData =$response->original->getData();
+
+        $this->assertEquals($customer->id, $getData['customer']->id);
+        $this->assertEquals($customer->name, $getData['customer']->name);
+        $this->assertEquals($customer->surname, $getData['customer']->surname);
     }
 
     /** @test **/

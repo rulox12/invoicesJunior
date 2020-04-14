@@ -23,7 +23,7 @@ class IndexImportsTest extends TestCase
     /** @test * */
     public function a_user_who_is_not_registered_can_imports_index()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $response = $this->actingAs($user)
             ->get(route('imports.index'))

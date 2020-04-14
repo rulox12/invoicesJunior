@@ -15,7 +15,7 @@ class EditUsersTest extends TestCase
     /** @test * */
     public function users_can_edit_users()
     {
-        $userDefult = $this->defaultUser();
+        $userDefult = $this->createSuperAdminUser();
 
         $user = factory(User::class)->create();
 
@@ -35,7 +35,7 @@ class EditUsersTest extends TestCase
     /** @test * */
     public function users_unregister_can_not_edit_users()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
 
         $this
             ->get(route('users.edit', $user))

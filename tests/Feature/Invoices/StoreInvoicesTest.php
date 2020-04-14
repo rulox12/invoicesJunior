@@ -5,10 +5,8 @@ namespace Tests\Feature\Invoices;
 use App\Entities\Customer;
 use App\Entities\Invoice;
 use App\Entities\Seller;
-use App\User;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithoutEvents;
 use Tests\TestCase;
 use Illuminate\Support\Facades\Config;
 
@@ -36,7 +34,7 @@ class StoreInvoicesTest extends TestCase
     /** @test **/
     public function save_a_invoice_with_a_logged_in_user()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('invoices.store'),
                 $this->newInvoice()
@@ -64,7 +62,7 @@ class StoreInvoicesTest extends TestCase
     {
         $data = [];
 
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('invoices.store'),
                 $data
@@ -76,7 +74,7 @@ class StoreInvoicesTest extends TestCase
     /** @test **/
     public function saves_user_who_was_created_that_invoice()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
 
         $response = $this
             ->actingAs($user)
@@ -92,7 +90,7 @@ class StoreInvoicesTest extends TestCase
     /** @test **/
     public function a_user_cannot_create_an_invoice_with_an_incorrect_due_date()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
         $invoice = $this->newInvoice();
         $invoice['due_date'] = Carbon::now('America/Bogota')->addHours('-2');
 
