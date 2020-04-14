@@ -3,7 +3,6 @@
 namespace Tests\Feature\Customers;
 
 use App\Entities\Customer;
-use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -22,10 +21,10 @@ class StoreCustomersTest extends TestCase
         ];
     }
 
-    /** @test **/
+    /** @test * */
     public function save_a_customer_with_a_logged_in_user()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('customers.store'),
                 $this->newCustomer()
@@ -35,7 +34,7 @@ class StoreCustomersTest extends TestCase
             ->assertStatus(302);
     }
 
-    /** @test **/
+    /** @test * */
     public function save_a_customer_with_a_unregister_user()
     {
         $this
@@ -48,12 +47,12 @@ class StoreCustomersTest extends TestCase
             ->assertStatus(302);
     }
 
-    /** @test **/
+    /** @test * */
     public function save_an_customer_without_data()
     {
         $data = [];
 
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(
                 route('customers.store'),
                 $data
@@ -62,16 +61,21 @@ class StoreCustomersTest extends TestCase
             ->assertStatus(302);
     }
 
-    /** @test **/
+    /** @test * */
     public function saves_user_who_was_created_that_customer()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
 
-        $this
+        $response = $this
             ->actingAs($user)
             ->post(
                 route('customers.store'),
-                $this->newCustomer()
+                [
+                    "type_document" => "CC",
+                    "document" => "213123",
+                    "name" => "Erin Hahn",
+                    "surname" => "Jackson"
+                ]
             );
 
         $customer = Customer::latest()->first();

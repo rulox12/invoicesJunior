@@ -14,7 +14,7 @@ class ShowInvoicesTest extends TestCase
     /** @test **/
     public function a_logged_in_user_can_see_a_invoice()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $invoice = factory(Invoice::class)->create();
 

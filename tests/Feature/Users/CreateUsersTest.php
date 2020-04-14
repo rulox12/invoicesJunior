@@ -12,7 +12,7 @@ class CreateUsersTest extends TestCase
     /** @test * */
     public function an_registered_user_can_see_the_create_user_view()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->get(route('users.create'))
             ->assertStatus(200);
     }

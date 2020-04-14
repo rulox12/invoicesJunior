@@ -14,7 +14,7 @@ class IndexInvoicesTest extends TestCase
     /** @test **/
     public function users_can_list_invoices()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $invoiceA = factory(Invoice::class)->create();
         $invoiceB = factory(Invoice::class)->create();
@@ -45,7 +45,7 @@ class IndexInvoicesTest extends TestCase
     /** @test **/
     public function a_user_register_can_filter_invoice_for_total()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $total = 20000;
 
@@ -65,7 +65,7 @@ class IndexInvoicesTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_invoice_for_state()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $state = "New_State";
 
@@ -83,7 +83,7 @@ class IndexInvoicesTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_invoice_for_date()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $date = Carbon::now('America/Bogota');
         $from = $date;
@@ -103,7 +103,7 @@ class IndexInvoicesTest extends TestCase
     /** @test * */
     public function not_filter_invoice_for_date()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $date = Carbon::now('America/Bogota');
         $from = $date;

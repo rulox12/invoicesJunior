@@ -14,7 +14,7 @@ class IndexCustomersTest extends TestCase
     /** @test **/
     public function user_login_can_list_customers()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $customerA = factory(Customer::class)->create();
         $customerB = factory(Customer::class)->create();
@@ -45,7 +45,7 @@ class IndexCustomersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_customer_for_name()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $name = "Unique_name";
 
@@ -65,7 +65,7 @@ class IndexCustomersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_customer_for_state()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $state = true;
 

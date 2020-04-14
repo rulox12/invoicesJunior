@@ -5,6 +5,7 @@
 use App\User;
 use Carbon\Carbon;
 use Faker\Generator as Faker;
+use Illuminate\Support\Facades\Config;
 
 $factory->define(User::class, function (Faker $faker) {
     $monthRandom = rand(1, 12);

@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Customer;
-use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
 use Facades\App\Repository\Customers;
 use Illuminate\Http\Request;
@@ -11,9 +10,7 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * CustomerController constructor.
      */
     public function __construct()
     {

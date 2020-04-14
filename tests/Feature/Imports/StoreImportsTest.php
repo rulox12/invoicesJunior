@@ -17,7 +17,7 @@ class StoreImportsTest extends TestCase
     {
         Excel::fake();
 
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->post(route('imports.store'), [
                 'file' => UploadedFile::fake()->create('ejemplo.xlsx'),
                 'type' => 'App\Imports\InvoicesImport'

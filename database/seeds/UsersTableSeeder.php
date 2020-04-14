@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             'name' => "daniel",
             'surname' => "camilo",
             'email' => 'user@gmail.com',
-            'type_Document' => 'CC',
+            'type_document' => 'CC',
             'document' => '1036343123',
             'password' => bcrypt('user123'),
             'state' => true,

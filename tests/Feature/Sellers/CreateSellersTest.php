@@ -12,7 +12,7 @@ class CreateSellersTest extends TestCase
     /** @test * */
     public function an_registered_user_can_see_the_create_seller_view()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->get(route('sellers.create'))
             ->assertStatus(200);
     }
