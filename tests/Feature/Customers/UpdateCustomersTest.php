@@ -10,17 +10,6 @@ class UpdateCustomersTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function newCustomer()
-    {
-        return [
-            'name' => substr($this->faker->firstName, 0, 20),
-            'surname' => substr($this->faker->lastName, 0, 20),
-            'type_document' => substr($this->faker->lastName, 0, 2),
-            'document' => $this->faker->numberBetween($min = 100000, $max = 9000000),
-            'state' => $this->faker->boolean,
-        ];
-    }
-
     /** @test * */
     public function unauthenticated_user_cannot_update_a_customer()
     {
@@ -41,7 +30,8 @@ class UpdateCustomersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_a_customer()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
+
         $name = "new name";
         $surname = "surname";
         $type_document = "CC";
@@ -72,7 +62,7 @@ class UpdateCustomersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_state_a_customer_active()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $customer = factory(Customer::class)->create(['state' => true]);
 
@@ -89,7 +79,7 @@ class UpdateCustomersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_state_a_customer_inactive()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $customer = factory(Customer::class)->create(['state' => false]);
 

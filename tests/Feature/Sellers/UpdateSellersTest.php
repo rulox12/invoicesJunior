@@ -41,7 +41,7 @@ class UpdateSellersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_a_seller()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
         $name = "new name";
         $surname = "surname";
         $type_document = "CC";
@@ -71,7 +71,7 @@ class UpdateSellersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_state_a_seller_active()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $seller = factory(Seller::class)->create(['state' => true]);
 
@@ -88,7 +88,7 @@ class UpdateSellersTest extends TestCase
     /** @test * */
     public function admin_users_can_update_state_a_seller_inactive()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $seller = factory(Seller::class)->create(['state' => false]);
 

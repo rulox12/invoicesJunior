@@ -20,9 +20,12 @@ class PaymentRequest
 
     private $userAgent;
 
+    private $paymentConcept;
+
     public function __construct($data)
     {
-        $this->reference = $data['reference'];
+        $this->paymentConcept = $data['reference'];
+        $this->reference = time() . '-' . $data['reference'];
         $this->customer = $data['customer'];
         $this->description = $data['description'];
         $this->amount = $data['amount'];
@@ -93,30 +96,38 @@ class PaymentRequest
     }
 
     /**
+     * @return mixed
+     */
+    public function getPaymentConcept()
+    {
+        return $this->paymentConcept;
+    }
+
+    /**
      * @return array
      */
     public function toArray()
     {
-        return [
-            'buyer'           => [
-                'name'          => $this->customer->name,
-                'surname'       => $this->customer->surname,
+        return array(
+            'buyer' => array(
+                'name' => $this->customer->name,
+                'surname' => $this->customer->surname,
                 'type_document' => $this->customer->type_document,
-                'document'      => $this->customer->document,
-            ],
-            'payment'         => [
-                'reference'   => time() . '-' . $this->getReference(),
+                'document' => $this->customer->document,
+            ),
+            'payment' => array(
+                'reference' => $this->getReference(),
                 'description' => $this->description,
-                'amount'      => [
+                'amount' => array(
                     'currency' => 'COP',
-                    'total'    => $this->amount,
-                ],
-            ],
-            'expiration'      => $this->getExpirationDate(),
-            'returnUrl'       => $this->getReturUrl() . $this->getReference(),
-            'ipAddress'       => $this->getIpAddress(),
-            'userAgent'       => $this->getUserAgent(),
-            'payment_concept' => $this->getReference()
-        ];
+                    'total' => $this->amount,
+                ),
+            ),
+            'expiration' => $this->getExpirationDate(),
+            'returnUrl' => $this->getReturUrl() . $this->getReference(),
+            'ipAddress' => $this->getIpAddress(),
+            'userAgent' => $this->getUserAgent(),
+            'payment_concept' => $this->getPaymentConcept()
+        );
     }
 }

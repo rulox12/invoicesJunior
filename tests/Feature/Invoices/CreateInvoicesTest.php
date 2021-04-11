@@ -12,7 +12,7 @@ class CreateInvoicesTest extends TestCase
     /** @test **/
     public function an_registered_user_can_see_the_create_invoice_view()
     {
-        $this->actingAs($this->defaultUser())
+        $this->actingAs($this->createSuperAdminUser())
             ->get(route('invoices.create'))
             ->assertStatus(200);
     }

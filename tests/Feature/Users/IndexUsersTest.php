@@ -15,7 +15,7 @@ class IndexUsersTest extends TestCase
     /** @test **/
     public function users_can_list_users()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $userA = factory(User::class)->create();
         $userB = factory(User::class)->create();
@@ -46,7 +46,7 @@ class IndexUsersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_user_for_name()
     {
-        $defaultUser = $this->defaultUser();
+        $defaultUser = $this->createSuperAdminUser();
 
         $name = "Unique_name";
 
@@ -66,7 +66,7 @@ class IndexUsersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_user_for_state()
     {
-        $defaultUser = $this->defaultUser();
+        $defaultUser = $this->createSuperAdminUser();
 
         $state = true;
 

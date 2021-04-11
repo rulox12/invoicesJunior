@@ -15,7 +15,7 @@ class IndexSellersTest extends TestCase
     /** @test **/
     public function users_can_list_sellers()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $sellerA = factory(Seller::class)->create();
         $sellerB = factory(Seller::class)->create();
@@ -46,7 +46,7 @@ class IndexSellersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_seller_for_name()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $name = "Unique_name";
 
@@ -66,7 +66,7 @@ class IndexSellersTest extends TestCase
     /** @test * */
     public function a_user_register_can_filter_seller_for_state()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $state = true;
 

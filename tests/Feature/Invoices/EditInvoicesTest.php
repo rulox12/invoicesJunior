@@ -14,7 +14,7 @@ class EditInvoicesTest extends TestCase
     /** @test **/
     public function users_can_edit_invoices()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $invoice = factory(Invoice::class)->create();
 
@@ -32,7 +32,7 @@ class EditInvoicesTest extends TestCase
     /** @test **/
     public function users_can_edit_status_invoices()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $invoice = factory(Invoice::class)->create();
 

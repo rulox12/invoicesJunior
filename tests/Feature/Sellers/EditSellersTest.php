@@ -15,7 +15,7 @@ class EditSellersTest extends TestCase
     /** @test * */
     public function users_can_edit_sellers()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $seller = factory(Seller::class)->create();
 

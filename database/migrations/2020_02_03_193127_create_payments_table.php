@@ -24,9 +24,11 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger('invoice_id');
             $table->unsignedInteger('created_by')->nullable();
             $table->unsignedInteger('updated_by')->nullable();
+            $table->timestamps();
 
             $table->foreign('invoice_id')->references('id')->on('invoices');
-            $table->timestamps();
+            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('updated_by')->references('id')->on('users');
         });
     }
 

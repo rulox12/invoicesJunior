@@ -2,14 +2,17 @@
 
 namespace App;
 
-use App\Entities\Role;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use HasRoles;
+    use HasApiTokens;
 
     protected $primaryKey = 'id';
     /**
@@ -24,7 +27,6 @@ class User extends Authenticatable
         'type_document',
         'document',
         'password',
-        'role_id',
         'state'
     ];
 
@@ -45,11 +47,6 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
 
     public function scopeFilter($query, $type, $value)
     {

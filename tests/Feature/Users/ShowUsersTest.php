@@ -15,7 +15,7 @@ class ShowUsersTest extends TestCase
     /** @test **/
     public function a_logged_in_user_can_see_a_user()
     {
-        $userDefault = $this->defaultUser();
+        $userDefault = $this->createSuperAdminUser();
 
         $user = factory(User::class)->create();
 
@@ -35,7 +35,7 @@ class ShowUsersTest extends TestCase
     /** @test **/
     public function a_unregister_user_can_not_see_a_user()
     {
-        $user = factory(User::class)->create();
+        $user = $this->createSuperAdminUser();
 
         $response = $this
             ->get(

@@ -15,7 +15,7 @@ class ShowSellersTest extends TestCase
     /** @test **/
     public function a_logged_in_user_can_see_a_seller()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $seller = factory(Seller::class)->create();
 

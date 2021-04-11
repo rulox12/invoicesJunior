@@ -11,7 +11,7 @@ class HomeControllerTest extends TestCase
 
     public function test_users_can_list_customers()
     {
-        $user = $this->defaultUser();
+        $user = $this->createSuperAdminUser();
 
         $response = $this->actingAs($user)
             ->get(route('home.index'))

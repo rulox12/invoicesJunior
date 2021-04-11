@@ -3,14 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Entities\Customer;
-use App\Entities\User;
 use App\Http\Requests\StoreCustomerRequest;
 use Facades\App\Repository\Customers;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
 {
+    /**
+     * CustomerController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:customer list|customer create|customer edit|customer delete', ['only' => ['index','show']]);
+        $this->middleware('permission:customer create', ['only' => ['create','store']]);
+        $this->middleware('permission:customer edit', ['only' => ['edit','update']]);
+    }
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $data = $request->all();

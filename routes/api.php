@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -12,7 +10,9 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('login', 'API\RegisterController@login');
+Route::middleware('auth:api')->group(function () {
+    Route::resource('invoices-api', 'API\InvoiceController');
+    Route::resource('customer-api', 'API\CustomerController');
+    Route::resource('seller-api', 'API\SellerController');
 });

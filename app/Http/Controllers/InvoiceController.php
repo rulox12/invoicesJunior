@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entities\Customer;
 use App\Entities\Invoice;
+use App\Entities\Payment;
 use App\Entities\Seller;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\UpdateInvoiceRequest;
@@ -14,6 +15,20 @@ use Illuminate\Support\Facades\Config;
 
 class InvoiceController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:invoice list|invoice create|invoice edit', ['only' => ['index','show']]);
+        $this->middleware('permission:invoice create', ['only' => ['create','store']]);
+        $this->middleware('permission:invoice edit', ['only' => ['edit','update']]);
+    }
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function index(Request $request)
     {
         $data = $request->all();
@@ -53,7 +68,9 @@ class InvoiceController extends Controller
     {
         $invoice->load(['customer', 'user', 'seller']);
 
-        return view('invoices.show', compact('invoice'));
+        $payments = Payment::getAllPaymentForInvoice($invoice->id);
+
+        return view('invoices.show', compact(['invoice', 'payments']));
     }
 
     public function edit(Invoice $invoice)
@@ -123,6 +140,6 @@ class InvoiceController extends Controller
     {
         return Invoice::orderBy('id', 'DESC')
             ->filter($type, $value)
-            ->paginate(5);
+            ->paginate(10);
     }
 }

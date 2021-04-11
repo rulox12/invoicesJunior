@@ -4,7 +4,7 @@
     <div class="card card-default">
         <div class="card-header">
             <div class="d-flex">
-                <div class="mr-auto p-2 h4">{{ __('Users')  }}</div>
+                <div class="mr-auto p-2 h2">{{ __('Users')  }}</div>
                 <form class="form-inline pull-right" method="GET" action="{{ route('users.index') }}">
                     <div class="p-2">
                         <div class="form-group">
@@ -14,7 +14,6 @@
                                 <option value="document">{{__("Identification")}}</option>
                                 <option value="email">{{__("Email")}}</option>
                                 <option value="state">{{__("State")}}</option>
-                                <option value="role_id">{{__("Role")}}</option>
                             </select>
                         </div>
                     </div>
@@ -28,18 +27,20 @@
                         </div>
                     </div>
                     <div class="p-2">
-                        <button type="submit" class="btn btn-default">
+                        <button type="submit" class="btn btn-secondary">
                             <span data-feather="search"></span>
                         </button>
 
                     </div>
                 </form>
-                <div class="p-2">
-                    <a href="{{route('users.create')}}" class="btn btn btn-primary" role="button"
-                       aria-disabled="true">
-                        {{__('Create')}}
-                    </a>
-                </div>
+                @can('user create')
+                    <div class="p-2">
+                        <a href="{{route('users.create')}}" class="btn btn btn-primary" role="button"
+                           aria-disabled="true">
+                            {{__('Create')}}
+                        </a>
+                    </div>
+                @endcan
             </div>
         </div>
         <div class="card-body">
@@ -71,23 +72,20 @@
                                 <a class="nav-link" href="{{route('users.show', $user)}}">
                                     <span data-feather="eye"></span>
                                 </a>
-
-                                <a class="nav-link" href="{{route('users.edit', $user)}}">
-                                    <span data-feather="edit"></span>
-                                </a>
-                                @if($user->state)
-                                    <a class="nav-link" href="{{route('users.delete', $user)}}">
-                                        <span data-feather="user-x"></span>
+                                @can('user edit')
+                                    <a class="nav-link" href="{{route('users.edit', $user)}}">
+                                        <span data-feather="edit"></span>
                                     </a>
-                                @else
-                                    <a class="btn btn-link" href="{{route('users.delete', $user)}}">
-                                        <span
-                                            aria-label="{{__('Is inactive')}}"
-                                            data-balloon-pos="up-right"
-                                            data-feather="user-check">
-                                        </span>
-                                    </a>
-                                @endif
+                                    @if($user->state)
+                                        <a class="nav-link" href="{{route('users.delete', $user)}}">
+                                            <span data-feather="user-x"></span>
+                                        </a>
+                                    @else
+                                        <a class="nav-link" href="{{route('users.delete', $user)}}">
+                                            <span data-feather="user-check"></span>
+                                        </a>
+                                    @endif
+                                @endcan
                             </div>
                         </td>
                     </tr>
@@ -112,13 +110,7 @@
                         '<option value="true">{{__("Active")}}</option>' +
                         '<option value="false">{{__("Inactive")}}</option>' +
                         '</select>');
-                } else if ($(this).val() == "role_id") {
-                    $('#value').replaceWith('' +
-                        '<select id="value" class="form-control" name="value">' +
-                        '@foreach($roles as $role)' +
-                        '<option value="{{ $role->id }}">{{ $role->name  }}</option>' +
-                        '@endforeach' +
-                        '</select>');
+
                 } else {
                     $('#value').replaceWith('' +
                         '<input type="text"' +

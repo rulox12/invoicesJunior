@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>{{__("Invoices")}}</title>
     <link rel="stylesheet" href="{{mix("vendor/css/app.css")}}">
-
 </head>
 <body>
 <div class="container-fluid">
